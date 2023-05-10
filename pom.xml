@@ -131,6 +131,23 @@
         </dependency>
     </dependencies>
 
+    <!-- Plugin repository (EBI) is required for cdk-build-utils and
+         ojdcheck to build the javadoc. -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ebi-repo</id>
+            <name>EBI Maven Repository</name>
+            <url>https://www.ebi.ac.uk/~maven/m2repo/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <pluginManagement>
             <plugins>
