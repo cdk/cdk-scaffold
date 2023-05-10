@@ -38,6 +38,20 @@ If you are using Maven, you can install the cdk-scaffold package using:
 </dependency>
 ```
 
+### Snapshot releases
+
+For snapshot releases (currently `2.8-SNAPSHOT`) include the following fragment to define the
+snapshot repository:
+ 
+```xml
+<repositories>
+  <repository>
+    <id>ossrh</id>
+    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+  </repository>
+</repositories>
+```
+
 Further details on building the project in integrated development environments (IDEs) are available on the wiki:
  * [Building the CDK](https://github.com/cdk/cdk/wiki/Building-CDK)
  * [Maven Reporting Plugins](https://github.com/cdk/cdk/wiki/Maven-Reporting-Plugins)
