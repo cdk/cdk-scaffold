@@ -28,7 +28,7 @@ The library is built with Apache Maven and currently requires Java 1.8 or later.
 
 You can download a pre-built library JAR from [releases](https://github.com/cdk/cdk-scaffold/releases). 
 
-If you are using Maven, you can install the cdk-bundle package using:
+If you are using Maven, you can install the cdk-scaffold package using:
 
 ```xml
 <dependency>
