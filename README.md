@@ -32,9 +32,9 @@ If you are using Maven, you can install the cdk-scaffold package using:
 
 ```xml
 <dependency>
-<artifactId>cdk-scaffold</artifactId>
-<groupId>org.openscience.cdk</groupId>
-<version>2.8</version>
+  <artifactId>cdk-scaffold</artifactId>
+  <groupId>org.openscience.cdk</groupId>
+  <version>2.8</version>
 </dependency>
 ```
 
