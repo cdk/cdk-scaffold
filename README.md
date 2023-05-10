@@ -24,20 +24,13 @@ Schaub et al. "Scaffold Generator: a Java library implementing molecular scaffol
 
 ## Install
 
-CDK-scaffold depends on the cdk-bundle artifact. See the [CDK documentation](https://github.com/cdk/cdk) for installation instructions.
-
 The library is built with Apache Maven and currently requires Java 1.8 or later.
 
-You can also download a pre-built library JAR from [releases](https://github.com/cdk/cdk-scaffold/releases). 
+You can download a pre-built library JAR from [releases](https://github.com/cdk/cdk-scaffold/releases). 
 
-If you are using Maven, you can install the cdk-bundle and cdk-scaffold packages using:
+If you are using Maven, you can install the cdk-bundle package using:
 
 ```xml
-<dependency>
-  <artifactId>cdk-bundle</artifactId>
-  <groupId>org.openscience.cdk</groupId>
-  <version>2.8</version>
-</dependency>
 <dependency>
 <artifactId>cdk-scaffold</artifactId>
 <groupId>org.openscience.cdk</groupId>
@@ -52,14 +45,3 @@ Further details on building the project in integrated development environments (
 ## Getting Help
 
 The [Toolkit-Rosetta Wiki Page](https://github.com/cdk/cdk/wiki/Toolkit-Rosetta) provides some examples for common tasks. If you need help using the CDK and have questions please use the user mailing list, [``cdk-user@lists.sf.net``](mailto:cdk-user@lists.sf.net) (**you must [subscribe here]( https://sourceforge.net/projects/cdk/lists/cdk-user) first to post**).
- 
-## Acknowledgments
-
-![YourKit Logo](https://www.yourkit.com/images/yklogo.png)
-
-The CDK developers use YourKit to profile and optimise code.
-
-YourKit supports open source projects with its full-featured Java Profiler.
-YourKit, LLC is the creator of <a href="https://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a>
-and <a href="https://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>,
-innovative and intelligent tools for profiling Java and .NET applications.
