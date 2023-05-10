@@ -1,0 +1,16 @@
+reports
+.settings
+doc
+cdk.log*
+sourcedist
+*~
+netbeans-delta-build/
+nbproject/CDK-dynamic.properties
+nbproject/private/
+target
+.project
+.classpath
+*.dot
+/.idea/
+*.iml
+.DS_Store
