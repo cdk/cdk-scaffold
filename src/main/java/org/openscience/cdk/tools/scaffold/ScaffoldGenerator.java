@@ -422,7 +422,7 @@ public class ScaffoldGenerator {
         List<IAtomContainer> tmpSideChainList = new ArrayList<>(tmpClonedMolecule.getAtomCount());
         /*Mark each atom with ascending number*/
         Integer tmpCounter = 0;
-        HashMap<Integer, IAtom> tmpMoleculePropertyMap = new HashMap<>(tmpClonedMolecule.getAtomCount(), 1);
+        HashMap<Integer, IAtom> tmpMoleculePropertyMap = new HashMap<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
         for(IAtom tmpAtom : tmpClonedMolecule.atoms()) {
             tmpAtom.setProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY, tmpCounter);
             tmpMoleculePropertyMap.put(tmpCounter, tmpAtom);
@@ -494,7 +494,7 @@ public class ScaffoldGenerator {
         List<IAtomContainer> tmpLinkerList = new ArrayList<>(tmpClonedMolecule.getAtomCount());
         List<IAtomContainer> tmpRingList = this.getRingsInternal(tmpScaffold, true);
         List<Integer> tmpRingAtomNumberList = new ArrayList<>(tmpClonedMolecule.getAtomCount());
-        HashMap<Integer, IAtom> tmpScaffoldPropertyMap = new HashMap<>(tmpClonedMolecule.getAtomCount(), 1);
+        HashMap<Integer, IAtom> tmpScaffoldPropertyMap = new HashMap<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
         /*Go through each ring of the scaffold and add there atom number to the list*/
         for(IAtomContainer tmpRing : tmpRingList) {
             for(IAtom tmpAtom : tmpRing.atoms()) {
@@ -1015,7 +1015,7 @@ public class ScaffoldGenerator {
                     }
                 }
                 /*Add the missing atom and the respective bond*/
-                HashMap<Integer, IAtom> tmpMurckoAtomMap = new HashMap<>(tmpMurckoFragment.getAtomCount(), 1);
+                HashMap<Integer, IAtom> tmpMurckoAtomMap = new HashMap<>((int)(tmpMurckoFragment.getAtomCount() * 1.5), 0.75f);
                 for (IAtom tmpAtom : tmpMurckoFragment.atoms()) {
                     /*Save the properties of the murcko fragment*/
                     int tmpAtomProperty = tmpAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY);
@@ -1136,7 +1136,7 @@ public class ScaffoldGenerator {
             IAtomContainer tmpCycle = tmpRingSet.getAtomContainer(tmpCount); //Store rings as AtomContainer
             if(anIsKeepingNonSingleBonds) {
                 /*Add the missing atom and the respective bond*/
-                HashMap<Integer, IAtom> tmpMurckoAtomMap = new HashMap<>(tmpCycle.getAtomCount(), 1);
+                HashMap<Integer, IAtom> tmpMurckoAtomMap = new HashMap<>((int)(tmpCycle.getAtomCount() * 1.5), 0.75f);
                 for(IAtom tmpAtom : tmpCycle.atoms()) {
                     /*Save the properties of the murcko fragment*/
                     int tmpAtomPropertyNumber = tmpAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY);
@@ -1322,7 +1322,7 @@ public class ScaffoldGenerator {
                 IAtom tmpNonCAtom = null;
                 /*Count the DoNotRemove heteroatoms*/
                 for(IAtom tmpRingAtom : tmpRingClone.atoms()) {
-                    if(!tmpRingAtom.getSymbol().equals("C") && !tmpDoNotRemove.contains(tmpRingAtom.getProperty(SCAFFOLD_ATOM_COUNTER_PROPERTY))) {
+                    if(!tmpRingAtom.getSymbol().equals("C") && !tmpDoNotRemove.contains((int)tmpRingAtom.getProperty(SCAFFOLD_ATOM_COUNTER_PROPERTY))) {
                         tmpNonCCounter++;
                         tmpNonCAtom = tmpRingAtom;
                     }
@@ -1442,7 +1442,7 @@ public class ScaffoldGenerator {
         IAtomContainer tmpClonedMolecule = aMolecule.clone();
         IAtomContainer tmpClonedRing = aRing.clone();
         /*Remove ring atoms from original molecule*/
-        HashMap<Integer, IAtom> tmpMoleculeCounterMap = new HashMap<>((aMolecule.getAtomCount()), 1);
+        HashMap<Integer, IAtom> tmpMoleculeCounterMap = new HashMap<>((int)(aMolecule.getAtomCount() * 1.5), 0.75f);
         for(IAtom tmpMolAtom : tmpClonedMolecule.atoms()) { //Save all atoms of the molecule
             tmpMoleculeCounterMap.put(tmpMolAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY), tmpMolAtom);
         }
@@ -2371,7 +2371,7 @@ public class ScaffoldGenerator {
     protected IAtomContainer applySchuffenhauerRuleThirteen(IAtomContainer aMolecule, List<IAtomContainer> aRings) throws CDKException, CloneNotSupportedException {
         IAtomContainer tmpClonedMolecule = aMolecule.clone();
         //Strings are stored in a sorted map. The natural order is alphabetical.
-        TreeMap<String, IAtomContainer> tmpRingRemovedMap = new TreeMap();//Sorted map
+        TreeMap<String, IAtomContainer> tmpRingRemovedMap = new TreeMap<>();//Sorted map
         for (IAtomContainer tmpRing : aRings) {
             IAtomContainer tmpRingRemoved = this.removeRing(tmpClonedMolecule, true, tmpRing);
             //Remove linker
