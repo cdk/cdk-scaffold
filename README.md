@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold) [![build](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml/badge.svg)](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cdk-scaffold&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cdk-scaffold)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold) [![build](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml/badge.svg)](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cdk-scaffold&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cdk-scaffold) [![DOI](https://zenodo.org/badge/638930745.svg)](https://zenodo.org/badge/latestdoi/638930745)
 
 # CDK-Scaffold Module
 ## Scaffold Functionalities for the Chemistry Development Kit (CDK)
