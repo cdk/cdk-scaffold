@@ -43,6 +43,16 @@ import java.util.Objects;
  */
 public abstract class ScaffoldNodeCollectionBase {
     /**
+     * Initial capacity for hash maps storing nodes.
+     */
+    protected final int NODE_MAPS_INIT_CAPACITY = 200;
+
+    /**
+     * Load factor for hash maps storing nodes.
+     */
+    protected final float NODE_MAPS_LOAD_FACTOR = 0.6f;
+
+    /**
      * Saves all ScaffoldNodes and numbers them in ascending order. Starts at 0.
      * reverseNodeMap with key and value swapped. Key:Number, Value:ScaffoldNodeBase
      */
