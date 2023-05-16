@@ -16,8 +16,8 @@ authors:
   - family-names: "Steinbeck"
     given-names: "Christoph"
     orcid: "https://orcid.org/0000-0001-6966-0814"
-
-date-released: 2023-05-10
+doi: "10.5281/zenodo.7940339"
+date-released: 2023-05-16
 url: "https://github.com/cdk/cdk-scaffold"
 license: LGPL-2.1
 references:
