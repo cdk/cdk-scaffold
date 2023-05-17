@@ -83,15 +83,16 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
         this.smilesMap.put(tmpSmiles, aNode);
         int tmpLevel = aNode.getLevel();
         if(this.levelMap.get(tmpLevel) == null) {
-            this.levelMap.put(tmpLevel, new HashSet<>());
+            this.levelMap.put(tmpLevel, new HashSet<>(50, 0.75f));
         }
         this.levelMap.get(tmpLevel).add(aNode);
-        HashMap<Integer, HashSet<ScaffoldNodeBase>> tmpLevelMap = new HashMap<>();
+        HashMap<Integer, HashSet<ScaffoldNodeBase>> tmpLevelMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+                ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
         for(ScaffoldNodeBase tmpNodeBase : this.getAllNodes()) {
             NetworkNode tmpNetworkNode = (NetworkNode) tmpNodeBase;
             int tmpLevelInternal = tmpNetworkNode.getLevel();
             if(tmpLevelMap.get(tmpLevelInternal) == null) {
-                tmpLevelMap.put(tmpLevelInternal, new HashSet<>());
+                tmpLevelMap.put(tmpLevelInternal, new HashSet<>(50, 0.75f));
             }
             tmpLevelMap.get(tmpLevelInternal).add(tmpNetworkNode);
         }

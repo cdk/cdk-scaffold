@@ -82,7 +82,7 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
         //Add to levelMap
         int tmpLevel = aNode.getLevel();
         if(this.levelMap.get(tmpLevel) == null) {
-            this.levelMap.put(tmpLevel, new HashSet<>());
+            this.levelMap.put(tmpLevel, new HashSet<>(50, 0.75f));
         }
         this.levelMap.get(tmpLevel).add(aNode);
         for(int tmpCount = 0; tmpCount < aNode.getLevel(); tmpCount++) {
