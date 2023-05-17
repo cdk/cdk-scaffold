@@ -994,12 +994,12 @@ public class ScaffoldGenerator {
             /*Generate the common scaffold retaining atoms multi-bonded to rings and linkers directly*/
             case SCAFFOLD:
                 /*Store the number of each Atom of the murckoFragment*/
-                HashSet<Integer> tmpMurckoAtomNumbers = new HashSet<>(tmpClonedMolecule.getAtomCount(), 1);
+                HashSet<Integer> tmpMurckoAtomNumbers = new HashSet<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
                 for (IAtom tmpMurckoAtom : tmpMurckoFragment.atoms()) {
                     tmpMurckoAtomNumbers.add(tmpMurckoAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY));
                 }
                 /*Store the number of each Atom that is not single bonded and the respective bond*/
-                HashSet<IBond> tmpAddBondSet = new HashSet<>((tmpClonedMolecule.getAtomCount() / 2), 1);
+                HashSet<IBond> tmpAddBondSet = new HashSet<>((tmpClonedMolecule.getAtomCount()), 0.75f);
                 for (IBond tmpBond : tmpClonedMolecule.bonds()) {
                     if (!tmpBond.getOrder().equals(IBond.Order.SINGLE) && !tmpBond.getOrder().equals(IBond.Order.UNSET)) {//Consider non-single bonds
                         //If both atoms of the bond are in the Murcko fragment, they are taken over anyway

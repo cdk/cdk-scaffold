@@ -45,12 +45,12 @@ public abstract class ScaffoldNodeCollectionBase {
     /**
      * Initial capacity for hash maps storing nodes.
      */
-    protected final int NODE_MAPS_INIT_CAPACITY = 200;
+    protected static final int NODE_MAPS_INIT_CAPACITY = 300;
 
     /**
      * Load factor for hash maps storing nodes.
      */
-    protected final float NODE_MAPS_LOAD_FACTOR = 0.6f;
+    protected static final float NODE_MAPS_LOAD_FACTOR = 0.6f;
 
     /**
      * Saves all ScaffoldNodes and numbers them in ascending order. Starts at 0.
@@ -89,10 +89,14 @@ public abstract class ScaffoldNodeCollectionBase {
      * @param aSmilesGenerator Used SMILES Generator
      */
     public ScaffoldNodeCollectionBase(SmilesGenerator aSmilesGenerator) {
-        this.nodeMap = new HashMap<Integer, ScaffoldNodeBase>();
-        this.reverseNodeMap = new HashMap<ScaffoldNodeBase, Integer>();
-        this.smilesMap = new HashMap<String, ScaffoldNodeBase>();
-        this.levelMap = new HashMap<Integer, HashSet<ScaffoldNodeBase>>();
+        this.nodeMap = new HashMap<Integer, ScaffoldNodeBase>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+                ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
+        this.reverseNodeMap = new HashMap<ScaffoldNodeBase, Integer>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+                ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
+        this.smilesMap = new HashMap<String, ScaffoldNodeBase>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+                ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
+        this.levelMap = new HashMap<Integer, HashSet<ScaffoldNodeBase>>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+                ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
         this.smilesGenerator = aSmilesGenerator;
         this.nodeCounter = 0;
     }
