@@ -999,7 +999,7 @@ public class ScaffoldGenerator {
                     tmpMurckoAtomNumbers.add(tmpMurckoAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY));
                 }
                 /*Store the number of each Atom that is not single bonded and the respective bond*/
-                HashSet<IBond> tmpAddBondSet = new HashSet<>((tmpClonedMolecule.getAtomCount()), 0.75f);
+                HashSet<IBond> tmpAddBondSet = new HashSet<>(tmpClonedMolecule.getAtomCount(), 0.75f);
                 for (IBond tmpBond : tmpClonedMolecule.bonds()) {
                     if (!tmpBond.getOrder().equals(IBond.Order.SINGLE) && !tmpBond.getOrder().equals(IBond.Order.UNSET)) {//Consider non-single bonds
                         //If both atoms of the bond are in the Murcko fragment, they are taken over anyway
@@ -1105,13 +1105,13 @@ public class ScaffoldGenerator {
         List<IAtomContainer> tmpCycles = new ArrayList<>(tmpNewCycles.numberOfCycles());
         int tmpCycleNumber = tmpNewCycles.numberOfCycles();
         //HashMap cannot be larger than the total number of atoms. Key = C and Val = Bond
-        HashSet<IBond> tmpAddBondSet = new HashSet<>((tmpClonedMolecule.getAtomCount() / 2), 1);
+        HashSet<IBond> tmpAddBondSet = new HashSet<>(tmpClonedMolecule.getAtomCount(), 0.75f);
         /*Store non single bonded atoms*/
         if(anIsKeepingNonSingleBonds) { //Only needed if non-single bonded atoms are retained
             /*Generate the murckoFragment*/
             IAtomContainer tmpMurckoFragment = this.getMurckoFragment(tmpClonedMolecule);
             /*Store the number of each Atom of the murckoFragment*/
-            HashSet<Integer> tmpMurckoAtomNumbers = new HashSet<>(tmpClonedMolecule.getAtomCount(), 1);
+            HashSet<Integer> tmpMurckoAtomNumbers = new HashSet<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
             for (IAtom tmpMurckoAtom : tmpMurckoFragment.atoms()) {
                 tmpMurckoAtomNumbers.add(tmpMurckoAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY));
             }
@@ -1244,11 +1244,11 @@ public class ScaffoldGenerator {
         IAtomContainer tmpMoleculeClone = aMolecule.clone();
         IAtomContainer tmpRingClone = aRing.clone();
         boolean tmpIsRingAromatic = true;
-        HashSet<Integer> tmpIsNotRing = new HashSet<>(aMolecule.getAtomCount(), 1);
-        HashSet<Integer> tmpDoNotRemove = new HashSet<>(aMolecule.getAtomCount(), 1);
+        HashSet<Integer> tmpIsNotRing = new HashSet<>((int)(aMolecule.getAtomCount() * 1.5), 0.75f);
+        HashSet<Integer> tmpDoNotRemove = new HashSet<>((int)(aMolecule.getAtomCount() * 1.5), 0.75f);
         int tmpBoundNumber = 0;
         /*Preparation for insertion of double bonds with removal of aromatic rings*/
-        HashSet<Integer> tmpEdgeAtomNumbers = new HashSet<>(tmpMoleculeClone.getAtomCount(), 1);
+        HashSet<Integer> tmpEdgeAtomNumbers = new HashSet<>((int)(tmpMoleculeClone.getAtomCount() * 1.5), 0.75f);
         /*Store the number of each atom in the molecule*/
         for(IAtom tmpMolAtom : tmpMoleculeClone.atoms()) {
             tmpIsNotRing.add(tmpMolAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY));
@@ -1278,7 +1278,7 @@ public class ScaffoldGenerator {
         /*Add all atoms of rings that are not to be removed to tmpDoNotRemove*/
         //Get all cycles of the molecule
         Cycles tmpCycles = this.getCycleFinder(tmpMoleculeClone).find(tmpMoleculeClone);
-        HashSet<Integer> tmpRingPropertySet = new HashSet<>(tmpRingClone.getAtomCount(), 1);
+        HashSet<Integer> tmpRingPropertySet = new HashSet<>((int)(tmpRingClone.getAtomCount() * 1.5), 0.75f);
         //Save the properties of the ring
         for(IAtom tmpRingAtom : tmpRingClone.atoms()) {
             tmpRingPropertySet.add(tmpRingAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY));
@@ -1474,7 +1474,7 @@ public class ScaffoldGenerator {
         IAtomContainer tmpClonedRing = aRing.clone();
         /*---Recognition of rings in which no atom belongs to another ring---*/
         List<IAtomContainer> tmpClonedRings = new ArrayList<>(aRings.size());
-        HashSet<Integer> tmpRingsNumbers = new HashSet<>(aRings.size() * tmpClonedRing.getAtomCount(), 1);
+        HashSet<Integer> tmpRingsNumbers = new HashSet<>((int)(aRings.size() * tmpClonedRing.getAtomCount() * 1.5), 0.75f);
         boolean isAnIndependentRing = false;
         /*Store all ring atoms of the whole molecule without the tested ring*/
         for(IAtomContainer tmpRing : aRings) {
@@ -1510,7 +1510,7 @@ public class ScaffoldGenerator {
             return true;
         }
         /*Store the number of all ring atoms*/
-        HashSet<Integer> tmpMoleculeNumbers = new HashSet<>(tmpClonedMolecule.getAtomCount(), 1);
+        HashSet<Integer> tmpMoleculeNumbers = new HashSet<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
         for(IAtomContainer tmpRing : tmpClonedRings) {
             for(IAtom tmpRingAtom : tmpRing.atoms()) {
                 int tmpAtomNumber = tmpRingAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY);
@@ -1518,7 +1518,7 @@ public class ScaffoldGenerator {
             }
         }
         /*Store all the atoms of the other rings bordering the aromatic ring*/
-        HashSet<Integer> tmpEdgeAtomNumbers = new HashSet<>(tmpClonedMolecule.getAtomCount(), 1);
+        HashSet<Integer> tmpEdgeAtomNumbers = new HashSet<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
         for(IAtom tmpRingAtom : tmpClonedRing.atoms()) {
             //Skip the atom if it is already in the HashSet
             Integer tmpRingAtomProperty = tmpRingAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY);
@@ -1630,7 +1630,7 @@ public class ScaffoldGenerator {
             }
         }
         /*Store all the atoms of the other rings bordering the aromatic ring*/
-        HashSet<Integer> tmpEdgeAtomNumbers = new HashSet<>(tmpClonedMolecule.getAtomCount(), 1);
+        HashSet<Integer> tmpEdgeAtomNumbers = new HashSet<>((int)(tmpClonedMolecule.getAtomCount() * 1.5), 0.75f);
         for(IAtom tmpRingAtom : tmpClonedRing.atoms()) {
             //Skip the atom if it is already in the HashSet
             Integer tmpRingAtomProperty = tmpRingAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY);
@@ -1846,7 +1846,7 @@ public class ScaffoldGenerator {
                 tmpCycles = this.getCycleFinder(tmpRingRemoved).find(tmpRingRemoved); //get cycle number(nR)
                 tmpCycleIterable = tmpCycles.toRingSet().atomContainers();
             }
-            HashSet<IBond> tmpCycleBonds = new HashSet<>(aRings.size());
+            HashSet<IBond> tmpCycleBonds = new HashSet<>((int)(aRings.size() * 1.5), 0.75f);
             int tmpFusedRingBondCounter = 0; // Number of bonds being a member in more than one ring(nrrb)
             /*Count nrrb*/
             for(IAtomContainer tmpCycle : tmpCycleIterable) { //Go through all cycle
@@ -2271,8 +2271,8 @@ public class ScaffoldGenerator {
      * @throws CloneNotSupportedException if cloning is not possible.
      */
     protected boolean isRingAttachedToHeteroatomLinker(IAtomContainer aMolecule, IAtomContainer aRing) throws CDKException, CloneNotSupportedException {
-        HashSet<Integer> tmpRingPropertyNumbers = new HashSet<>(aRing.getAtomCount(), 1);
-        HashSet<Integer> tmpRemovedMurckoAtomNumbers = new HashSet<>(aMolecule.getAtomCount(), 1);
+        HashSet<Integer> tmpRingPropertyNumbers = new HashSet<>((int)(aRing.getAtomCount() * 1.5), 0.75f);
+        HashSet<Integer> tmpRemovedMurckoAtomNumbers = new HashSet<>((int)(aMolecule.getAtomCount() * 1.5), 0.75f);
         /*Save all numbers of the ring atoms*/
         for(IAtom tmpAtom : aRing.atoms()) {
             tmpRingPropertyNumbers.add(tmpAtom.getProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY));
