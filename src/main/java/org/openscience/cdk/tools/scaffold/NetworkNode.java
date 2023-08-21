@@ -50,7 +50,7 @@ public class NetworkNode <MoleculeType> extends ScaffoldNodeBase<MoleculeType> {
      */
     public NetworkNode(MoleculeType aMolecule) {
         super(aMolecule);
-        this.parents =  new ArrayList<NetworkNode<MoleculeType>>();
+        this.parents =  new ArrayList<>();
     }
 
     /**
@@ -72,7 +72,7 @@ public class NetworkNode <MoleculeType> extends ScaffoldNodeBase<MoleculeType> {
     @Override
     public NetworkNode<MoleculeType> addChild(MoleculeType aMolecule) throws NullPointerException {
         Objects.requireNonNull(aMolecule, "Given molecule is 'null'");
-        NetworkNode<MoleculeType> tmpChildNode = new NetworkNode<MoleculeType>(aMolecule);
+        NetworkNode<MoleculeType> tmpChildNode = new NetworkNode<>(aMolecule);
         this.children.add(tmpChildNode);
         return tmpChildNode;
     }

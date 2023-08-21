@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -88,14 +89,14 @@ public abstract class ScaffoldNodeCollectionBase {
      * Constructor
      * @param aSmilesGenerator Used SMILES Generator
      */
-    public ScaffoldNodeCollectionBase(SmilesGenerator aSmilesGenerator) {
-        this.nodeMap = new HashMap<Integer, ScaffoldNodeBase>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+    protected ScaffoldNodeCollectionBase(SmilesGenerator aSmilesGenerator) {
+        this.nodeMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
-        this.reverseNodeMap = new HashMap<ScaffoldNodeBase, Integer>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+        this.reverseNodeMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
-        this.smilesMap = new HashMap<String, ScaffoldNodeBase>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+        this.smilesMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
-        this.levelMap = new HashMap<Integer, HashSet<ScaffoldNodeBase>>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
+        this.levelMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
         this.smilesGenerator = aSmilesGenerator;
         this.nodeCounter = 0;
@@ -104,7 +105,7 @@ public abstract class ScaffoldNodeCollectionBase {
     /**
      * Default Constructor
      */
-    public ScaffoldNodeCollectionBase() {
+    protected ScaffoldNodeCollectionBase() {
         this(ScaffoldGenerator.SMILES_GENERATOR_SETTING_DEFAULT);
     }
 
@@ -139,11 +140,7 @@ public abstract class ScaffoldNodeCollectionBase {
         //Generate SMILES
         String tmpSmiles = this.smilesGenerator.create(aMolecule);
         /*Check in smilesMap*/
-        if(this.smilesMap.containsKey(tmpSmiles)) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.smilesMap.containsKey(tmpSmiles);
     }
 
     /**
@@ -210,7 +207,7 @@ public abstract class ScaffoldNodeCollectionBase {
      * Returns the number of the nodes and the nodes of the matrix in ascending order.
      * @return HashMap with the number of the nodes and the ScaffoldNodes in the order they appear in the matrix
      */
-    public HashMap<Integer, ScaffoldNodeBase> getMatrixNodes() {
+    public Map<Integer, ScaffoldNodeBase> getMatrixNodes() {
         return this.nodeMap;
     }
 

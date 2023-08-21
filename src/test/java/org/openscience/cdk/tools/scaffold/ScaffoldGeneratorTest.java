@@ -440,9 +440,6 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         //Load molecule from mol file
         IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/Test3.mol");
         List <IAtomContainer> tmpMoleculeList = tmpScaffoldGenerator.applyEnumerativeRemoval(tmpMolecule);
-        for (IAtomContainer tmpScaffold : tmpMoleculeList) {
-            System.out.println(tmpSmiGen.create(tmpScaffold));
-        }
         Assertions.assertEquals("O=C(NC1C(=O)N2CCSC21)c3conc3-c4ccccc4", tmpSmiGen.create(tmpMoleculeList.get(0)));
         Assertions.assertEquals("O=C(NC1C(=O)N2CCSC21)c3cnoc3", tmpSmiGen.create(tmpMoleculeList.get(1)));
         Assertions.assertEquals("O=C(NC1C(=O)NC1)c2conc2-c3ccccc3", tmpSmiGen.create(tmpMoleculeList.get(2)));

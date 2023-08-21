@@ -31,7 +31,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 
-
 /**
  * Top-level class to organise the TreeNodes as a tree.
  * A tree can have one root and several leaves.
@@ -81,12 +80,10 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
         this.smilesMap.put(tmpSmiles, aNode);
         //Add to levelMap
         int tmpLevel = aNode.getLevel();
-        if(this.levelMap.get(tmpLevel) == null) {
-            this.levelMap.put(tmpLevel, new HashSet<>(50, 0.75f));
-        }
+        this.levelMap.computeIfAbsent(tmpLevel, k -> new HashSet<>(50, 0.75f));
         this.levelMap.get(tmpLevel).add(aNode);
         for(int tmpCount = 0; tmpCount < aNode.getLevel(); tmpCount++) {
-            TreeNode tmpNextNode = ((TreeNode<?>) aNode).getParent();
+            TreeNode<?> tmpNextNode = ((TreeNode<?>) aNode).getParent();
             for(Object tmpString : aNode.getOriginSmilesList()) {
                 tmpNextNode.addOriginSmiles((String) tmpString);
             }
@@ -132,11 +129,7 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
      * @return true if tree has only one root and all nodes are connected
      */
     public boolean isValid() {
-        if(this.hasOneSingleRootNode() && this.isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.hasOneSingleRootNode() && this.isConnected();
     }
 
     /**
@@ -158,7 +151,7 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
     public boolean mergeTree(ScaffoldTree aScaffoldTree) throws CDKException, NullPointerException {
         Objects.requireNonNull(aScaffoldTree, "Given ScaffoldTree is 'null'");
         /*If the old ScaffoldTree is empty, transfer the new ScaffoldTree to be added.*/
-        if(this.getAllNodes().size() == 0  || this.getAllNodes().isEmpty()) {
+        if(this.getAllNodes().isEmpty()) {
             for(ScaffoldNodeBase tmpBaseNode : aScaffoldTree.getAllNodes()) {
                 TreeNode tmpNode = (TreeNode) tmpBaseNode;
                 this.addNode(tmpNode);
@@ -317,10 +310,6 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
                 return false;
             }
         }
-        if(tmpRootCounter == 1) { //If the tree has only one root
-            return true;
-        } else { //If the tree has no root
-            return false;
-        }
+        return tmpRootCounter == 1;
     }
 }

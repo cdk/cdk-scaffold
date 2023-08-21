@@ -70,7 +70,7 @@ public class TreeNode<MoleculeType> extends ScaffoldNodeBase<MoleculeType> {
     @Override
     public TreeNode<MoleculeType> addChild(MoleculeType aMolecule) throws NullPointerException {
         Objects.requireNonNull(aMolecule, "Given molecule is 'null'");
-        TreeNode<MoleculeType> tmpChildNode = new TreeNode<MoleculeType>(aMolecule);
+        TreeNode<MoleculeType> tmpChildNode = new TreeNode<>(aMolecule);
         this.children.add(tmpChildNode);
         tmpChildNode.parent = this;
         return tmpChildNode;
