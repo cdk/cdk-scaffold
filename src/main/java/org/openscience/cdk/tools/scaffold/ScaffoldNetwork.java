@@ -82,18 +82,14 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
         String tmpSmiles = this.smilesGenerator.create(tmpMolecule); //Convert molecule to SMILES
         this.smilesMap.put(tmpSmiles, aNode);
         int tmpLevel = aNode.getLevel();
-        if(this.levelMap.get(tmpLevel) == null) {
-            this.levelMap.put(tmpLevel, new HashSet<>(50, 0.75f));
-        }
+        this.levelMap.computeIfAbsent(tmpLevel, k -> new HashSet<>(50, 0.75f));
         this.levelMap.get(tmpLevel).add(aNode);
         HashMap<Integer, HashSet<ScaffoldNodeBase>> tmpLevelMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
         for(ScaffoldNodeBase tmpNodeBase : this.getAllNodes()) {
             NetworkNode tmpNetworkNode = (NetworkNode) tmpNodeBase;
             int tmpLevelInternal = tmpNetworkNode.getLevel();
-            if(tmpLevelMap.get(tmpLevelInternal) == null) {
-                tmpLevelMap.put(tmpLevelInternal, new HashSet<>(50, 0.75f));
-            }
+            tmpLevelMap.computeIfAbsent(tmpLevelInternal, k -> new HashSet<>(50, 0.75f));
             tmpLevelMap.get(tmpLevelInternal).add(tmpNetworkNode);
         }
         this.levelMap = tmpLevelMap;
@@ -147,15 +143,15 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
      */
     public void mergeNetwork(ScaffoldNetwork aScaffoldNetwork) throws CDKException {
         /*If the old ScaffoldNetwork is empty, transfer the new ScaffoldNetwork to be added.*/
-        if(this.getAllNodes().size() == 0  || this.getAllNodes().isEmpty()) {
-            for(Object tmpNode : aScaffoldNetwork.getAllNodes()) {
-                this.addNode((NetworkNode) tmpNode);
+        if(this.getAllNodes().isEmpty()) {
+            for(ScaffoldNodeBase tmpNode : aScaffoldNetwork.getAllNodes()) {
+                this.addNode(tmpNode);
             }
         }
         /*If the old Scaffold network is not empty*/
         else {
-            ArrayList<IAtomContainer> tmpMoleculeList = new ArrayList(aScaffoldNetwork.getAllNodes().size());
-            for(Object tmpNewNetworkObject : aScaffoldNetwork.getAllNodes()) {
+            ArrayList<IAtomContainer> tmpMoleculeList = new ArrayList<>(aScaffoldNetwork.getAllNodes().size());
+            for(ScaffoldNodeBase tmpNewNetworkObject : aScaffoldNetwork.getAllNodes()) {
                 NetworkNode tmpNewNetworkNode = (NetworkNode) tmpNewNetworkObject;
                 /*Node is not in network*/
                 if(!this.containsMolecule((IAtomContainer) tmpNewNetworkNode.getMolecule())) {

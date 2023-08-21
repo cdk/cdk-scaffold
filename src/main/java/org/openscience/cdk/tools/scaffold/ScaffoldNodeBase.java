@@ -52,7 +52,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * If additional information of the origin is needed,
      * it can be stored in a matrix with the IAtomContainer. The SMILES stored here can then be used as a key.
      */
-    protected ArrayList<String> originSmilesList;
+    protected List<String> originSmilesList;
 
     /**
      * List of SMILES of the molecules from which this fragment directly originates.
@@ -61,7 +61,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * If additional information of the origin is needed,
      * it can be stored in a matrix with the IAtomContainer. The SMILES stored here can then be used as a key.
      */
-    protected ArrayList<String> nonVirtualOriginSmilesList;
+    protected List<String> nonVirtualOriginSmilesList;
 
     /**
      * Children of the Node
@@ -73,12 +73,12 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * @param aMolecule molecule of the ScaffoldNodeBase
      * @throws NullPointerException if parameter is null
      */
-    public ScaffoldNodeBase(MoleculeType aMolecule) throws NullPointerException {
+    protected ScaffoldNodeBase(MoleculeType aMolecule) throws NullPointerException {
         Objects.requireNonNull(aMolecule, "Given molecule is 'null'");
         this.molecule = aMolecule;
-        this.children = new LinkedList<ScaffoldNodeBase<MoleculeType>>();
-        this.originSmilesList = new ArrayList<String>();
-        this.nonVirtualOriginSmilesList = new ArrayList<String>();
+        this.children = new LinkedList<>();
+        this.originSmilesList = new ArrayList<>();
+        this.nonVirtualOriginSmilesList = new ArrayList<>();
     }
 
     /**
@@ -86,7 +86,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * @return true if it has no children
      */
     public boolean isLeaf() {
-        return children.size() == 0;
+        return children.isEmpty();
     }
 
     /**
@@ -186,7 +186,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * Get the originSmilesList
      * @return List of SMILES of the molecules from which this fragment originates
      */
-    public ArrayList<String> getOriginSmilesList() {
+    public List<String> getOriginSmilesList() {
         return this.originSmilesList;
     }
 
@@ -195,7 +195,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * NonVirtualOrigin: This node is the direct(without further fragmentation) scaffold of this origin molecule.
      * @return List of SMILES of the molecules from which this fragment originates
      */
-    public ArrayList<String> getNonVirtualOriginSmilesList() {
+    public List<String> getNonVirtualOriginSmilesList() {
         return this.nonVirtualOriginSmilesList;
     }
 
@@ -221,7 +221,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * @param aOriginSmilesList SMILES of molecules that are set
      * @throws NullPointerException if parameter is null
      */
-    public void setOriginSmilesList(ArrayList<String> aOriginSmilesList) throws NullPointerException {
+    public void setOriginSmilesList(List<String> aOriginSmilesList) throws NullPointerException {
         Objects.requireNonNull(aOriginSmilesList, "Given SMILES of the molecule List is 'null'");
         this.originSmilesList = aOriginSmilesList;
     }
@@ -232,7 +232,7 @@ public abstract class ScaffoldNodeBase<MoleculeType> {
      * @param aNonVirtualOriginSmilesList SMILES of molecules that are set
      * @throws NullPointerException if parameter is null
      */
-    public void setNonVirtualOriginSmilesList(ArrayList<String> aNonVirtualOriginSmilesList) throws NullPointerException {
+    public void setNonVirtualOriginSmilesList(List<String> aNonVirtualOriginSmilesList) throws NullPointerException {
         Objects.requireNonNull(aNonVirtualOriginSmilesList, "Given SMILES of the molecule List is 'null'");
         this.nonVirtualOriginSmilesList = aNonVirtualOriginSmilesList;
     }

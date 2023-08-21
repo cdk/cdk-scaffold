@@ -451,10 +451,8 @@ public class ScaffoldGenerator {
         }
         /*Remove all numbers of the scaffold from the original molecule*/
         for(Integer tmpNumber : tmpRemovedNumberList) {
-            if(tmpMoleculePropertyMap.containsKey(tmpNumber)) {
-                if(tmpClonedMolecule.contains(tmpMoleculePropertyMap.get(tmpNumber))) {
-                    tmpClonedMolecule.removeAtom(tmpMoleculePropertyMap.get(tmpNumber));
-                }
+            if(tmpMoleculePropertyMap.containsKey(tmpNumber) && tmpClonedMolecule.contains(tmpMoleculePropertyMap.get(tmpNumber))) {
+                tmpClonedMolecule.removeAtom(tmpMoleculePropertyMap.get(tmpNumber));
             }
         }
         //Save each unconnected fragment that remains as a separate AtomContainer
@@ -507,10 +505,8 @@ public class ScaffoldGenerator {
         }
         /*Remove non ring atoms*/
         for(Integer tmpAtomNumber : tmpRingAtomNumberList) {
-            if(tmpScaffoldPropertyMap.containsKey(tmpAtomNumber)) {
-                if(tmpScaffold.contains(tmpScaffoldPropertyMap.get(tmpAtomNumber))) {
-                    tmpScaffold.removeAtom(tmpScaffoldPropertyMap.get(tmpAtomNumber));
-                }
+            if(tmpScaffoldPropertyMap.containsKey(tmpAtomNumber) && tmpScaffold.contains(tmpScaffoldPropertyMap.get(tmpAtomNumber))) {
+                tmpScaffold.removeAtom(tmpScaffoldPropertyMap.get(tmpAtomNumber));
             }
         }
         //Save each unconnected fragment that remains as a separate AtomContainer
@@ -632,7 +628,7 @@ public class ScaffoldGenerator {
                         //Create new node
                         NetworkNode<IAtomContainer> tmpNewNode = new NetworkNode<>(tmpRingRemoved);
                         //Add the new node as parent for the old one
-                        NetworkNode tmpNode1 = (NetworkNode) tmpScaffoldNetwork.getNode(tmpIterMol);
+                        NetworkNode<IAtomContainer> tmpNode1 = (NetworkNode<IAtomContainer>) tmpScaffoldNetwork.getNode(tmpIterMol);
                         tmpNode1.addParent(tmpNewNode);
                         //Add Origin
                         tmpNewNode.addOriginSmiles(tmpFirstNodeSmiles);
@@ -641,9 +637,9 @@ public class ScaffoldGenerator {
                         /*The node is already in the network*/
                     }   else {
                         /*Node with the same molecule already in the tree*/
-                        NetworkNode tmpOldNode = (NetworkNode) tmpScaffoldNetwork.getNode(tmpRingRemoved);
+                        NetworkNode<IAtomContainer> tmpOldNode = (NetworkNode<IAtomContainer>) tmpScaffoldNetwork.getNode(tmpRingRemoved);
                         /*Add parent*/
-                        NetworkNode tmpNewNode = (NetworkNode) tmpScaffoldNetwork.getNode(tmpIterMol);
+                        NetworkNode<IAtomContainer> tmpNewNode = (NetworkNode<IAtomContainer>) tmpScaffoldNetwork.getNode(tmpIterMol);
                         tmpNewNode.addParent(tmpOldNode);
                     }
                 }
@@ -739,7 +735,7 @@ public class ScaffoldGenerator {
         for(int tmpCounter = 0 ; tmpCounter < tmpScaffoldFragments.size(); tmpCounter++) {
             List<IAtomContainer> tmpRings = this.getRingsInternal(tmpScaffoldFragments.get(tmpCounter), true);
             /*If the fragment has only one ring or no ring, it does not need to be disassembled further*/
-            if(tmpRings.size() == 1 || tmpRings.size() == 0) {
+            if(tmpRings.size() == 1 || tmpRings.isEmpty()) {
                 break;
             }
             /*Only the removable terminal rings are further investigated*/
@@ -751,7 +747,7 @@ public class ScaffoldGenerator {
                 }
             }
             /*If the fragment has no candidate ring, it does not need to be disassembled further*/
-            if(tmpRemovableRings.size() == 0) {
+            if(tmpRemovableRings.isEmpty()) {
                 break;
             }
             /*Apply rule number one*/
@@ -867,7 +863,7 @@ public class ScaffoldGenerator {
         IAtomContainer tmpClonedMolecule = aMolecule.clone();
         List<IAtomContainer> tmpFragmentList = this.applySchuffenhauerRules(tmpClonedMolecule);
         /*Set the root for the ScaffoldTree and add the origin of the root*/
-        TreeNode<IAtomContainer> tmpReverseParentNode =  new TreeNode<IAtomContainer>(tmpFragmentList.get(tmpFragmentList.size()-1));
+        TreeNode<IAtomContainer> tmpReverseParentNode =  new TreeNode<>(tmpFragmentList.get(tmpFragmentList.size()-1));
         String tmpSmiles = this.getSmilesGenerator().create(tmpClonedMolecule);
         tmpReverseParentNode.addOriginSmiles(tmpSmiles);
         //Add non-virtual if tmpFragmentList.size loop do not run
@@ -878,11 +874,11 @@ public class ScaffoldGenerator {
         tmpScaffoldTree.addNode(tmpReverseParentNode);
         /*Build the ScaffoldTree with the smallest fragment as root and add the origin to each fragment*/
         for(int i = 1; i < tmpFragmentList.size(); i++) {
-            TreeNode<IAtomContainer> tmpNewNode = new TreeNode<IAtomContainer>(tmpFragmentList.get((tmpFragmentList.size() - 1) - i));
-            IAtomContainer tmpTestMol = (IAtomContainer) tmpNewNode.getMolecule();
-            TreeNode tmpNode = (TreeNode) tmpScaffoldTree.getAllNodesOnLevel(i - 1).get(0);
+            TreeNode<IAtomContainer> tmpNewNode = new TreeNode<>(tmpFragmentList.get((tmpFragmentList.size() - 1) - i));
+            IAtomContainer tmpTestMol = tmpNewNode.getMolecule();
+            TreeNode<IAtomContainer> tmpNode = (TreeNode<IAtomContainer>) tmpScaffoldTree.getAllNodesOnLevel(i - 1).get(0);
             tmpNode.addChild(tmpTestMol);
-            TreeNode tmpChildNode = (TreeNode) tmpScaffoldTree.getAllNodesOnLevel(i - 1).get(0).getChildren().get(0);
+            TreeNode<IAtomContainer> tmpChildNode = (TreeNode<IAtomContainer>) tmpScaffoldTree.getAllNodesOnLevel(i - 1).get(0).getChildren().get(0);
             tmpChildNode.addOriginSmiles(tmpSmiles);
             /*The last and thus largest fragment is directly related to the original molecule*/
             if(i == (tmpFragmentList.size() - 1)){
@@ -1741,7 +1737,7 @@ public class ScaffoldGenerator {
             }
         }
         /*Return the unchanged ring list if there are no macrocycles or small rings*/
-        if(!tmpHasRemovableMacroCycle || tmpSmallRings.size() == 0) {
+        if(!tmpHasRemovableMacroCycle || tmpSmallRings.isEmpty()) {
             return aRings;
         }
         /*Return the small rings if there are any*/
@@ -1915,7 +1911,7 @@ public class ScaffoldGenerator {
             }
         }
         /*If there are rings of the sizes searched for, they are returned*/
-        if(tmpReturnRingList.size() != 0) {
+        if(!tmpReturnRingList.isEmpty()) {
             return tmpReturnRingList;
         }
         /*If there are no rings of the searched sizes, the original rings are returned*/
@@ -1991,7 +1987,7 @@ public class ScaffoldGenerator {
             }
         }
         /*If the number of rings has changed due to this rule, return the changed number*/
-        if(tmpReturnRings.size() < aRings.size() && tmpReturnRings.size() != 0) {
+        if(tmpReturnRings.size() < aRings.size() && !tmpReturnRings.isEmpty()) {
             return tmpReturnRings;
         }
         return aRings;
@@ -2202,7 +2198,7 @@ public class ScaffoldGenerator {
             }
         }
         //Return aromatic rings if any are present
-        if(tmpReturnRingList.size() > 0){
+        if(!tmpReturnRingList.isEmpty()){
             return tmpReturnRingList;
         }
         //Return all rings if non-aromatic rings are present
@@ -2243,7 +2239,7 @@ public class ScaffoldGenerator {
             }
         }
         /*Return the rings attached to a linker with a heteroatom at the end if available*/
-        if(tmpRemoveRings.size() > 0) {
+        if(!tmpRemoveRings.isEmpty()) {
             return tmpRemoveRings;
         }
         /*Return the unchanged ring list if the rule cannot be applied to the rings*/
