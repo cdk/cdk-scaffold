@@ -122,7 +122,8 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
         String tmpSmiles = this.smilesGenerator.create((IAtomContainer) aNode.getMolecule()); //Convert molecule to SMILES
         this.smilesMap.remove(tmpSmiles, aNode);
         /*Remove from levelMap*/
-        levelMap.remove(Integer.valueOf(aNode.getLevel()), aNode);
+        HashSet<ScaffoldNodeBase> tmpNodesOnLevelSet = this.levelMap.get(Integer.valueOf(aNode.getLevel()));
+        tmpNodesOnLevelSet.remove(aNode);
     }
 
     /**
