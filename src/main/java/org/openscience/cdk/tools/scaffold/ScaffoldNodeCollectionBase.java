@@ -243,4 +243,25 @@ public abstract class ScaffoldNodeCollectionBase {
         tmpList.addAll(this.nodeMap.keySet());
         return tmpList;
     }
+
+    /**
+     * Adds the node to the internal node collections node map, reverse node map, smiles map, and level map.
+     * Does not test anything!
+     * @param aNode node to be added
+     * @throws CDKException if SMILES code of the molecule the node contains cannot be created
+     */
+    protected void addNodeToCollections(ScaffoldNodeBase aNode) throws CDKException {
+        //Add to nodeMap
+        this.nodeMap.put(this.nodeCounter, aNode);
+        //Add to reverseNodeMap
+        this.reverseNodeMap.put(aNode, this.nodeCounter);
+        /*Add to smilesMap*/
+        IAtomContainer tmpMolecule = (IAtomContainer) aNode.getMolecule();
+        String tmpSmiles = this.smilesGenerator.create(tmpMolecule); //Convert molecule to SMILES
+        this.smilesMap.put(tmpSmiles, aNode);
+        //Add to levelMap
+        int tmpLevel = aNode.getLevel();
+        this.levelMap.computeIfAbsent(tmpLevel, k -> new HashSet<>(50, 0.75f));
+        this.levelMap.get(tmpLevel).add(aNode);
+    }
 }
