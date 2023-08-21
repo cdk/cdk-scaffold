@@ -493,13 +493,9 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
     public void generateScaffoldNetworkTest() throws Exception {
         //Load molecule from mol file
         IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/Test3.mol");
-        //Generate a tree of molecules with iteratively removed terminal rings
+        //Generate a network of molecules with iteratively removed terminal rings
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
         ScaffoldNetwork tmpScaffoldNetwork = tmpScaffoldGenerator.generateScaffoldNetwork(tmpMolecule);
-        /*Remove some nodes. Nodes can be removed from the non-root end.
-        If nodes are removed in the middle of the tree, it becomes invalid*/
-        NetworkNode tmpRemoveNode = (NetworkNode) tmpScaffoldNetwork.getMatrixNode(9);
-        tmpScaffoldNetwork.removeNode(tmpRemoveNode);
         SmilesGenerator tmpSmilesGenerator = new SmilesGenerator(SmiFlavor.Unique);
         List <String> tmpStringList = new ArrayList<>();
         for(ScaffoldNodeBase<IAtomContainer> tmpTestNodeBase : tmpScaffoldNetwork.getAllNodes()) {
