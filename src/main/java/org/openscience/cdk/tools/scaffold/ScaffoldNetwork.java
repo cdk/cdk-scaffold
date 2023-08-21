@@ -73,17 +73,7 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
         if(!(aNode instanceof NetworkNode)) {
             throw new IllegalArgumentException("Node can not be added to ScaffoldNetwork. Parameter must be a NetworkNode.");
         }
-        //Add to nodeMap
-        this.nodeMap.put(this.nodeCounter, aNode);
-        //Add to reverseNodeMap
-        this.reverseNodeMap.put(aNode, this.nodeCounter);
-        /*Add to smilesMap*/
-        IAtomContainer tmpMolecule = (IAtomContainer) aNode.getMolecule();
-        String tmpSmiles = this.smilesGenerator.create(tmpMolecule); //Convert molecule to SMILES
-        this.smilesMap.put(tmpSmiles, aNode);
-        int tmpLevel = aNode.getLevel();
-        this.levelMap.computeIfAbsent(tmpLevel, k -> new HashSet<>(50, 0.75f));
-        this.levelMap.get(tmpLevel).add(aNode);
+        this.addNodeToCollections(aNode);
         HashMap<Integer, HashSet<ScaffoldNodeBase>> tmpLevelMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
         for(ScaffoldNodeBase tmpNodeBase : this.getAllNodes()) {

@@ -70,18 +70,7 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
         if(!(aNode instanceof TreeNode)) {
             throw new IllegalArgumentException("Node can not be added to ScaffoldTree. Parameter must be a TreeNode");
         }
-        //Add to nodeMap
-        this.nodeMap.put(this.nodeCounter, aNode);
-        //Add to reverseNodeMap
-        this.reverseNodeMap.put(aNode, this.nodeCounter);
-        /*Add to smilesMap*/
-        IAtomContainer tmpMolecule = (IAtomContainer) aNode.getMolecule();
-        String tmpSmiles = this.smilesGenerator.create(tmpMolecule); //Convert molecule to SMILES
-        this.smilesMap.put(tmpSmiles, aNode);
-        //Add to levelMap
-        int tmpLevel = aNode.getLevel();
-        this.levelMap.computeIfAbsent(tmpLevel, k -> new HashSet<>(50, 0.75f));
-        this.levelMap.get(tmpLevel).add(aNode);
+        this.addNodeToCollections(aNode);
         for(int tmpCount = 0; tmpCount < aNode.getLevel(); tmpCount++) {
             TreeNode<?> tmpNextNode = ((TreeNode<?>) aNode).getParent();
             for(Object tmpString : aNode.getOriginSmilesList()) {
