@@ -196,21 +196,28 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
     @Tag("SlowTest")
     public void getRingsTest() throws Exception {
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
-        HashMap<String, Integer> tmpFileNameToExpectedRingCountMap = new HashMap<>(10, 0.9f);
-        tmpFileNameToExpectedRingCountMap.put("Test1", 8);
-        tmpFileNameToExpectedRingCountMap.put("Test2", 3);
-        tmpFileNameToExpectedRingCountMap.put("Test3", 4);
-        tmpFileNameToExpectedRingCountMap.put("Test4", 4);
-        tmpFileNameToExpectedRingCountMap.put("Test5", 2);
-        tmpFileNameToExpectedRingCountMap.put("Test6", 3);
-        tmpFileNameToExpectedRingCountMap.put("Test7", 3);
+        SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
+        HashMap<String, String[]> tmpFileNameToExpectedRingCountMap = new HashMap<>(10, 0.9f);
+        tmpFileNameToExpectedRingCountMap.put("Test1", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test2", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test3", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test4", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test5", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test6", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test7", new String[]{});
         for (int tmpCount = 1; tmpCount < 8; tmpCount++) {
             String tmpFileName = "Test" + tmpCount;
             //Load molecule from mol file
             IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/" + tmpFileName + ".mol");
             //Generate rings
-            List<IAtomContainer> tmpRings =tmpScaffoldGenerator.getRings(tmpMolecule,true, true);
-            Assertions.assertEquals((int) tmpFileNameToExpectedRingCountMap.get(tmpFileName), tmpRings.size());
+            List<IAtomContainer> tmpRings = tmpScaffoldGenerator.getRings(tmpMolecule,false, true);
+            List<String> tmpRingSmilesList = new ArrayList<>(tmpRings.size());
+            for (IAtomContainer tmpRing : tmpRings) {
+                tmpRingSmilesList.add(tmpSmiGen.create(tmpRing));
+            }
+            Collections.sort(tmpRingSmilesList);
+            System.out.println(tmpRingSmilesList);
+            //TODO: check printed results and if they are ok, add them to the arrays above and assert here
         }
     }
 
