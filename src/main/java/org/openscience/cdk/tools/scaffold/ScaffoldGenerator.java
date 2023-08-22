@@ -397,7 +397,7 @@ public class ScaffoldGenerator {
                 CDKHydrogenAdder.getInstance(tmpRing.getBuilder()).addImplicitHydrogens(tmpRing);
             }
         }
-        return  tmpMoleculeList;
+        return tmpMoleculeList;
     }
 
     /**
