@@ -359,7 +359,7 @@ public class ScaffoldGenerator {
      */
     public IAtomContainer getScaffold(IAtomContainer aMolecule, boolean anAddImplicitHydrogens) throws CDKException, CloneNotSupportedException, NullPointerException {
         Objects.requireNonNull(aMolecule, "Input molecule must be non null");
-        IAtomContainer tmpMolecule =  this.getScaffoldInternal(aMolecule,
+        IAtomContainer tmpMolecule = this.getScaffoldInternal(aMolecule,
                 anAddImplicitHydrogens,
                 this.determineAromaticitySetting,
                 this.aromaticityModelSetting,
@@ -368,32 +368,24 @@ public class ScaffoldGenerator {
     }
 
     /**
-     * Generates a set of rings depending on the used CycleFinder.
+     * Extracts the individual rings from the scaffold of the given molecule.
      * The removal of atoms can create open valences. These open valences can be compensated with implicit hydrogens.
-     * Can optional add non-single bounded atoms to the rings.
-     * @param aMolecule molecule whose rings are produced.
+     * @param aMolecule molecule whose scaffold rings are produced.
      * @param anAddImplicitHydrogens Specifies whether implicit hydrogens are to be added at the end.
      * The removal of atoms can create open valences. These are not compensated with hydrogens at the end if this parameter is false.
-     * @param anIsKeepingNonSingleBonds if true, non-single bonded atoms are retained on the ring.
-     * @return rings of the inserted molecule.
+     * @return scaffold rings of the given molecule.
      * @throws CloneNotSupportedException if cloning is not possible.
-     * @throws CDKException problem with CDKHydrogenAdder: Throws if insufficient information is present or problem with aromaticity.apply()
+     * @throws CDKException problem with CDKHydrogenAdder: throws if insufficient information is present or problem with aromaticity.apply()
      * @throws NullPointerException if parameter is null
      */
-    public List<IAtomContainer> getRings(IAtomContainer aMolecule, boolean anAddImplicitHydrogens, boolean anIsKeepingNonSingleBonds) throws CloneNotSupportedException, CDKException, NullPointerException {
-        Objects.requireNonNull(aMolecule, "Input molecule must be non null");
-        IAtomContainer tmpClonedMolecule = aMolecule.clone();
-        /*Mark each atom with ascending number*/
-        Integer tmpCounter = 0;
-        for(IAtom tmpAtom : tmpClonedMolecule.atoms()) {
-            tmpAtom.setProperty(ScaffoldGenerator.SCAFFOLD_ATOM_COUNTER_PROPERTY, tmpCounter);
-            tmpCounter++;
-        }
-        List<IAtomContainer> tmpMoleculeList = this.getRingsInternal(tmpClonedMolecule, anIsKeepingNonSingleBonds);
-        /*Add back hydrogens*/
-        for(IAtomContainer tmpRing : tmpMoleculeList) {
-            AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(tmpRing);
-            if(anAddImplicitHydrogens) {
+    public List<IAtomContainer> getRings(IAtomContainer aMolecule, boolean anAddImplicitHydrogens) throws CloneNotSupportedException, CDKException, NullPointerException {
+        //performs null test
+        IAtomContainer tmpScaffold = this.getScaffold(aMolecule, anAddImplicitHydrogens);
+        List<IAtomContainer> tmpMoleculeList = this.getRingsInternal(tmpScaffold, (this.scaffoldModeSetting.equals(ScaffoldModeOption.SCAFFOLD)));
+        if(anAddImplicitHydrogens) {
+            /*Add back hydrogens*/
+            for(IAtomContainer tmpRing : tmpMoleculeList) {
+                AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(tmpRing);
                 CDKHydrogenAdder.getInstance(tmpRing.getBuilder()).addImplicitHydrogens(tmpRing);
             }
         }

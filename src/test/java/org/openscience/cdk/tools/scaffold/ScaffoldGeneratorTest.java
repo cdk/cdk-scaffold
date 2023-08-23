@@ -209,8 +209,9 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
             String tmpFileName = "Test" + tmpCount;
             //Load molecule from mol file
             IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/" + tmpFileName + ".mol");
+            System.out.println(tmpSmiGen.create(tmpScaffoldGenerator.getScaffold(tmpMolecule, true)));
             //Generate rings
-            List<IAtomContainer> tmpRings = tmpScaffoldGenerator.getRings(tmpMolecule,false, true);
+            List<IAtomContainer> tmpRings = tmpScaffoldGenerator.getRings(tmpMolecule, true);
             List<String> tmpRingSmilesList = new ArrayList<>(tmpRings.size());
             for (IAtomContainer tmpRing : tmpRings) {
                 tmpRingSmilesList.add(tmpSmiGen.create(tmpRing));
@@ -218,6 +219,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
             Collections.sort(tmpRingSmilesList);
             System.out.println(tmpRingSmilesList);
             //TODO: check printed results and if they are ok, add them to the arrays above and assert here
+            //TODO: Check the other methods that return building blocks of scaffolds!
         }
     }
 
@@ -265,7 +267,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
             //Generate scaffold
             IAtomContainer tmpScaffold = tmpScaffoldGenerator.getScaffold(tmpMolecule, true);
             //Generate Rings
-            List<IAtomContainer> tmpRings = tmpScaffoldGenerator.getRings(tmpScaffold, true, true);
+            List<IAtomContainer> tmpRings = tmpScaffoldGenerator.getRings(tmpScaffold, true);
             for (IAtomContainer tmpRing : tmpRings) {
                 /*Generate scaffold with removed ring*/
                 IAtomContainer tmpRemovedRing = tmpScaffoldGenerator.removeRing(tmpScaffold, true, tmpRing);
