@@ -368,7 +368,8 @@ public class ScaffoldGenerator {
     }
 
     /**
-     * Extracts the individual rings from the scaffold of the given molecule.
+     * Extracts the individual rings from the scaffold of the given molecule. The rings are not unified, i.e. if there
+     * are multiple benzene rings in the input molecule, they are all extracted and returned individually.
      * The removal of atoms can create open valences. These open valences can be compensated with implicit hydrogens.
      * @param aMolecule molecule whose scaffold rings are produced.
      * @param anAddImplicitHydrogens Specifies whether implicit hydrogens are to be added at the end.
@@ -394,12 +395,12 @@ public class ScaffoldGenerator {
 
     /**
      * Outputs all fragments that are not contained in the generated scaffold in contrast to the unchanged molecule.
-     * Those fragments are called SideChains.
+     * Those fragments are regarded as side chains of the molecule.
      * The scaffold is therefore subtracted from the original molecule and
      * all remaining fragments are saturated with hydrogens if anAddImplicitHydrogens is true. <p>
      *
      * SideChains cannot be generated for ELEMENTAL_WIRE_FRAME, BASIC_FRAMEWORK and BASIC_WIRE_FRAME themselves.
-     * Their SideChains are identical to those of MURCKO_FRAMEWORK. Therefore, they are used.
+     * Their side chains are identical to those of MURCKO_FRAMEWORK. Therefore, these are used for those scaffold modes.
      * @param aMolecule Molecule whose side chains are to be returned
      * @param anAddImplicitHydrogens Specifies whether implicit hydrogens are to be added at the end.
      * The removal of atoms can create open valences. These are not compensated with hydrogens at the end if this parameter is false.

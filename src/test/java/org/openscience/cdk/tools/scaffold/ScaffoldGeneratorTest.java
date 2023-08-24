@@ -50,7 +50,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * JUnit test class for the Scaffold Generator.
@@ -198,18 +200,17 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
         SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
         HashMap<String, String[]> tmpFileNameToExpectedRingCountMap = new HashMap<>(10, 0.9f);
-        tmpFileNameToExpectedRingCountMap.put("Test1", new String[]{});
-        tmpFileNameToExpectedRingCountMap.put("Test2", new String[]{});
-        tmpFileNameToExpectedRingCountMap.put("Test3", new String[]{});
-        tmpFileNameToExpectedRingCountMap.put("Test4", new String[]{});
-        tmpFileNameToExpectedRingCountMap.put("Test5", new String[]{});
-        tmpFileNameToExpectedRingCountMap.put("Test6", new String[]{});
-        tmpFileNameToExpectedRingCountMap.put("Test7", new String[]{});
+        tmpFileNameToExpectedRingCountMap.put("Test1", new String[]{"O1CCCCC1", "O1CCCCC1", "O1CCCCC1", "O1CCCCC1", "O1CCCCC1", "O=C1ccCCC1", "c1ccccc1", "c1ccccc1"});
+        tmpFileNameToExpectedRingCountMap.put("Test2", new String[]{"O=C1ccOCC=C1", "c1ccccc1", "c1ccccc1"});
+        tmpFileNameToExpectedRingCountMap.put("Test3", new String[]{"O=C1NCC1", "S1CNCC1", "c1ccccc1", "n1occc1"});
+        tmpFileNameToExpectedRingCountMap.put("Test4", new String[]{"O=C1cc-ccc1", "c1ccccc1", "c1ccccc1", "n1ccccc1"});
+        tmpFileNameToExpectedRingCountMap.put("Test5", new String[]{"O=C1C(SCC1)=C", "c1ccccc1"});
+        tmpFileNameToExpectedRingCountMap.put("Test6", new String[]{"c1ccccc1", "c1ccccc1", "c1ccccc1"});
+        tmpFileNameToExpectedRingCountMap.put("Test7", new String[]{"O=C1C=Cccc1", "c1ccccc1", "c1ccccc1"});
         for (int tmpCount = 1; tmpCount < 8; tmpCount++) {
             String tmpFileName = "Test" + tmpCount;
             //Load molecule from mol file
             IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/" + tmpFileName + ".mol");
-            System.out.println(tmpSmiGen.create(tmpScaffoldGenerator.getScaffold(tmpMolecule, true)));
             //Generate rings
             List<IAtomContainer> tmpRings = tmpScaffoldGenerator.getRings(tmpMolecule, true);
             List<String> tmpRingSmilesList = new ArrayList<>(tmpRings.size());
@@ -217,15 +218,17 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
                 tmpRingSmilesList.add(tmpSmiGen.create(tmpRing));
             }
             Collections.sort(tmpRingSmilesList);
-            System.out.println(tmpRingSmilesList);
-            //TODO: check printed results and if they are ok, add them to the arrays above and assert here
+            String[] tmpExpectedRingSmilesArray = tmpFileNameToExpectedRingCountMap.get(tmpFileName);
+            for (int i = 0; i < tmpRingSmilesList.size(); i++) {
+                Assertions.assertEquals(tmpExpectedRingSmilesArray[i], tmpRingSmilesList.get(i));
+            }
             //TODO: Check the other methods that return building blocks of scaffolds!
         }
     }
 
     /**
      * Test of removeRing() with V2000 and V3000 mol files.
-     * Loads the 7 Test(Test1.mol-Test7.mol) mol files from the resources folder and creates for each generated ring,
+     * Loads the 7 Test(Test1.mol-Test7.mol) mol files from the resources folder and creates for each generated ring
      * the corresponding remaining molecule with removed ring.
      *
      * @throws Exception if anything goes wrong
@@ -278,8 +281,8 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
 
     /**
      * Test of isRingTerminal() with V2000 and V3000 mol files.
-     * Loads the 7 Test(Test1.mol-Test7.mol) mol files from the resources folder and creates for each generated terminal
-     * ring, the corresponding total molecule with removed ring.
+     * Loads the 7 Test(Test1.mol-Test7.mol) mol files from the resources folder and creates for each terminal
+     * ring the corresponding remaining molecule after ring removal.
      *
      * @throws Exception if anything goes wrong
      */
@@ -318,6 +321,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
         SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
         HashMap<String, String[]> tmpFileNameToSideChainsSmilesMap = new HashMap<>(10, 0.9f);
+        //note: getSideChains() does *not* unify the extracted side chains, they are just unified in the expected lists below for simplicity
         tmpFileNameToSideChainsSmilesMap.put("Test1", new String[]{"C", "O", "O=C(COC)C(O)C(O)C", "O=C(O)C", "OC"});
         tmpFileNameToSideChainsSmilesMap.put("Test2", new String[]{"C", "O", "OC"});
         tmpFileNameToSideChainsSmilesMap.put("Test3", new String[]{"C", "O=CO", "F", "Cl"});
@@ -334,6 +338,25 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
             for (IAtomContainer tmpSideChain : tmpSideChains) {
                 Assertions.assertTrue(Arrays.asList(tmpFileNameToSideChainsSmilesMap.get(tmpFileName)).contains(tmpSmiGen.create(tmpSideChain)));
             }
+        }
+    }
+
+    /**
+     * Checks the extracted side chains of test molecule 3 (Flucloxacillin) for correctness.
+     *
+     * @throws Exception if anything goes wrong
+     */
+    @Test
+    public void getSideChainsFlucloxacillinTest() throws Exception {
+        SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
+        //Load molecule from mol file
+        IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/Test3.mol");
+        //Generate the scaffold
+        ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
+        List<IAtomContainer> tmpSideChains = tmpScaffoldGenerator.getSideChains(tmpMolecule, true);
+        String[] tmpExpectedSideChainSmiles = new String[]{"C", "C", "O=CO", "F", "Cl", "C"};
+        for (int i = 0; i< tmpSideChains.size(); i++) {
+            Assertions.assertEquals(tmpExpectedSideChainSmiles[i], tmpSmiGen.create(tmpSideChains.get(i)));
         }
     }
 
@@ -382,6 +405,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
         SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
         HashMap<String, String[]> tmpFileNameToLinkerSmilesMap = new HashMap<>(10, 0.9f);
+        //note: getLinkers() does *not* unify the extracted side chains, they are just unified in the expected lists below for simplicity
         tmpFileNameToLinkerSmilesMap.put("Test1", new String[]{"O"});
         tmpFileNameToLinkerSmilesMap.put("Test2", new String[]{"O=CC"});
         tmpFileNameToLinkerSmilesMap.put("Test3", new String[]{"O=CN"});
@@ -443,7 +467,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
      */
     @Test
     @Tag("SlowTest")
-    public void getIterativeRemovalTest() throws Exception {
+    public void getEnumerativeRemovalTest() throws Exception {
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
         SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
         //Load molecule from mol file
@@ -561,7 +585,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         tmpOverlapScaffoldTree.mergeTree(tmpScaffoldTree6);
         tmpScaffoldTree.mergeTree(tmpOverlapScaffoldTree);
         ScaffoldTree tmpUnfitScaffoldTree = tmpScaffoldGenerator.generateSchuffenhauerTree(tmpMolecule);
-        /*Does the new tree fit in the old one*/
+        /*The first molecule has a different root parent scaffold and does therefore not fit into the tree*/
         Assertions.assertFalse(tmpScaffoldTree.mergeTree(tmpUnfitScaffoldTree));
         /*Check number of nodes*/
         Assertions.assertEquals(7, tmpScaffoldTree.getAllNodes().size());
@@ -572,6 +596,22 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         IAtomContainer tmpMoleculeFive = (IAtomContainer) tmpScaffoldTree.getMatrixNode(5).getMolecule();
         /*Check molecule 5*/
         Assertions.assertEquals("C=1C=CC(=CC1)C2NNC(N2)C=3C=CC=CC3", tmpSmilesGenerator.create(tmpMoleculeFive));
+        int[][] tmpExpectedMatrix = {{0,1,0,0,1,0,0}, {1,0,1,0,0,0,1}, {0,1,0,1,0,0,0}, {0,0,1,0,0,0,0}, {1,0,0,0,0,1,0}, {0,0,0,0,1,0,0}, {0,1,0,0,0,0,0}};
+        Integer[][] tmpTreeMatrix = tmpScaffoldTree.getMatrix();
+        for (int i = 0; i < tmpTreeMatrix.length; i++) {
+            for (int j = 0; j < tmpTreeMatrix[i].length; j++) {
+                Assertions.assertEquals(tmpExpectedMatrix[i][j], tmpTreeMatrix[i][j].intValue());
+            }
+        }
+        String[] tmpExpectedMatrixNodesSmilesCodes = new String[]{"N1NCNC1", "S1CNN2NCNC12", "S1C(NN2NCNC12)C=3C=CC=CC3", "S1C(NN2NC(NC12)C=3C=CC=CC3)C=4C=CC=CC4", "C=1C=CC(=CC1)C2NNCN2", "C=1C=CC(=CC1)C2NNC(N2)C=3C=CC=CC3", "S1CNN2NC(NC12)C=3C=CC=CC3"};
+        Map<Integer, ScaffoldNodeBase> tmpMatrixNodesMap = tmpScaffoldTree.getMatrixNodes();
+        for (Integer tmpIndex : tmpMatrixNodesMap.keySet()) {
+            Assertions.assertEquals(tmpExpectedMatrixNodesSmilesCodes[tmpIndex], tmpSmilesGenerator.create((IAtomContainer) tmpMatrixNodesMap.get(tmpIndex).getMolecule()));
+        }
+        //node 4 (index 3) can be removed without breaking the tree because it is a top-level scaffold
+        tmpScaffoldTree.removeNode(tmpMatrixNodesMap.get(3));
+        Assertions.assertTrue(tmpScaffoldTree.isValid());
+        Assertions.assertEquals(6, tmpScaffoldTree.getMatrix().length);
     }
 
     /**
@@ -609,12 +649,29 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         SmilesGenerator tmpSmilesGenerator = new SmilesGenerator(SmiFlavor.Unique);
         IAtomContainer tmpNodeMolecule = (IAtomContainer) tmpScaffoldNetwork.getMatrixNode(8).getMolecule();
         Assertions.assertEquals("S1C(NN2NC(NC12)C=3C=CC=CC3)C=4C=CC=CC4", tmpSmilesGenerator.create(tmpNodeMolecule));
+        Integer[][] tmpNetworkMatrix = tmpScaffoldNetwork.getMatrix();
+        for (int i = 0; i < tmpNetworkMatrix.length; i++) {
+            //note: cannot test for exact matrix values since those might be different in different testing environments
+            Assertions.assertEquals(16, tmpNetworkMatrix[i].length);
+        }
+        HashSet<String> tmpExpectedMatrixNodesSmilesCodes = new HashSet<>(Arrays.asList("S1CNN2NCNC12", "S1CNNC1", "N1NCNC1", "S1CNNC1C=2C=CC=CC2",
+                "C=1C=CC=CC1", "C=1C=CC(=CC1)C2NNCN2", "S1CNN2NC(NC12)C=3C=CC=CC3", "S1C(NN2NCNC12)C=3C=CC=CC3",
+                "S1C(NN2NC(NC12)C=3C=CC=CC3)C=4C=CC=CC4", "C1CCCCCC1", "C1CC1", "C1CCC2CC2CC1", "C1CCC2CCCCCC2CC1",
+                "C1CCC2CCC3CC3CC2CC1", "C1CC2CC2CC3CCC4CC4CC13", "C=1C=CC(=CC1)C2NNC(N2)C=3C=CC=CC3"));
+        Map<Integer, ScaffoldNodeBase> tmpMatrixNodesMap = tmpScaffoldNetwork.getMatrixNodes();
+        Assertions.assertEquals(16, tmpMatrixNodesMap.size());
+        for (Integer tmpIndex : tmpMatrixNodesMap.keySet()) {
+            //note: cannot test for specific order since that might be different in different testing environments
+            Assertions.assertTrue(tmpExpectedMatrixNodesSmilesCodes.contains(tmpSmilesGenerator.create((IAtomContainer) tmpMatrixNodesMap.get(tmpIndex).getMolecule())));
+        }
+        tmpScaffoldNetwork.removeNode(tmpMatrixNodesMap.get(15));
+        Assertions.assertEquals(15, tmpScaffoldNetwork.getMatrix().length);
     }
 
     /**
      * Loads two stereo-isomers as SMILES and joins them as a tree. Since the SMILESGenerator setting is "Isomeric",
      * the stereochemistry is kept in consideration and the two molecules are represented in the tree as two different ones.
-     * The structure is similar to the method "merge*Non*StereoMoleculesToForestTest()" except for the setting.
+     * The structure is analogous to the test method "merge*Non*StereoMoleculesToForestTest()" except for the setting.
      *
      * @throws Exception if anything goes wrong
      */
@@ -641,7 +698,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
     /**
      * Loads two stereo-isomers as SMILES and joins them as a tree. Since the SMILESGenerator setting is "Unique",
      * the stereochemistry is ignored and the two molecules are represented as one in the tree.
-     * The structure is similar to the method "mergeStereoMoleculesToForestTest()" except for the setting.
+     * The structure is analogous to the test method "mergeStereoMoleculesToForestTest()" except for the setting.
      *
      * @throws Exception if anything goes wrong
      */
@@ -691,7 +748,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
     }
 
     /**
-     * Loads adamantane as a mol file and checks its applySchuffenhauerRules/applyEnumerativeRemoval Output.
+     * Loads adamantane as a mol file and checks its applySchuffenhauerRules/applyEnumerativeRemoval output.
      * The output should be only one Fragment.
      *
      * @throws Exception If anything goes wrong
