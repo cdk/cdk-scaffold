@@ -593,7 +593,7 @@ public class ScaffoldGenerator {
         //List of all fragments already created and size estimated on the basis of an empirical value
         List<IAtomContainer> tmpIterativeRemovalList = new ArrayList<>(tmpRingCount * 45);
         tmpIterativeRemovalList.add(tmpScaffoldOriginal); //Add origin Scaffold
-        /*Add the first node to the tree*/
+        /*Add the first node to the network*/
         NetworkNode<IAtomContainer> tmpFirstNode = new NetworkNode<>(tmpScaffoldOriginal);
         tmpScaffoldNetwork.addNode(tmpFirstNode);
         /*Get the origin and link it to the first node*/
@@ -614,7 +614,12 @@ public class ScaffoldGenerator {
                 /*Consider all removable terminal rings*/
                 if (this.isRingTerminal(tmpIterMol, tmpRing) && this.isRingRemovable(tmpRing, tmpAllRingsList, tmpIterMol)) {
                     //Remove next ring
-                    IAtomContainer tmpRingRemoved = this.getScaffoldInternal(this.removeRing(tmpIterMol, true, tmpRing), true, this.determineAromaticitySetting, aromaticityModelSetting, this.scaffoldModeSetting);
+                    IAtomContainer tmpRingRemoved = this.getScaffoldInternal(
+                            this.removeRing(tmpIterMol, true, tmpRing),
+                            true,
+                            this.determineAromaticitySetting,
+                            aromaticityModelSetting,
+                            this.scaffoldModeSetting);
                     /*The node is not yet in the network and must therefore still be added.*/
                     if(!tmpScaffoldNetwork.containsMolecule(tmpRingRemoved)) {
                         tmpIterativeRemovalList.add(tmpRingRemoved);
@@ -625,10 +630,10 @@ public class ScaffoldGenerator {
                         tmpNode1.addParent(tmpNewNode);
                         //Add Origin
                         tmpNewNode.addOriginSmiles(tmpFirstNodeSmiles);
-                        //Add new node to the tree
+                        //Add new node to the network
                         tmpScaffoldNetwork.addNode(tmpNewNode);
-                        /*The node is already in the network*/
-                    }   else {
+                    /*The node is already in the network*/
+                    } else {
                         /*Node with the same molecule already in the tree*/
                         NetworkNode<IAtomContainer> tmpOldNode = (NetworkNode<IAtomContainer>) tmpScaffoldNetwork.getNode(tmpRingRemoved);
                         /*Add parent*/
@@ -638,6 +643,7 @@ public class ScaffoldGenerator {
                 }
             }
         }
+        tmpScaffoldNetwork.updateLevelMap();
         return tmpScaffoldNetwork;
     }
 
