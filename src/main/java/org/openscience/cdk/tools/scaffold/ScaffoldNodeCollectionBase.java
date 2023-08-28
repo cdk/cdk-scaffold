@@ -189,7 +189,7 @@ public abstract class ScaffoldNodeCollectionBase {
     public List<ScaffoldNodeBase> getAllNodesOnLevel(int aLevel) throws IllegalArgumentException {
         if(this.getMaxLevel() >= aLevel) { //Level must be less than or equal to the maximum level
             ArrayList<ScaffoldNodeBase> tmpList = new ArrayList<>(this.levelMap.get(aLevel));
-            return  tmpList;
+            return tmpList;
         }
         throw new IllegalArgumentException("Level does not exist: " + aLevel);
     }
@@ -227,9 +227,11 @@ public abstract class ScaffoldNodeCollectionBase {
      */
     public List<ScaffoldNodeBase> getAllNodes() {
         List<ScaffoldNodeBase> tmpList = new ArrayList<>();
-        for(HashSet<ScaffoldNodeBase> tmpValueList : this.levelMap.values()) {
+        //note: why was the level map used before? Using the node map makes more sense. Investigate if there are problems
+        /*for(HashSet<ScaffoldNodeBase> tmpValueList : this.levelMap.values()) {
             tmpList.addAll(tmpValueList);
-        }
+        }*/
+        tmpList.addAll(this.nodeMap.values());
         return tmpList;
     }
 

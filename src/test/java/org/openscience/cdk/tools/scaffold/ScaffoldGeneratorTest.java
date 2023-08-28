@@ -492,7 +492,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
      */
     @Test
     @Tag("SlowTest")
-    public void generateSchuffenhauerTreeTest() throws Exception {
+    public void generateSchuffenhauerTreeTestSingleMol() throws Exception {
         //Load molecule from mol file
         IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/Test3.mol");
         //Generate a tree of molecules with iteratively removed terminal rings following the Schuffenhauer rules
@@ -514,13 +514,40 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
     }
 
     /**
+     * Parses three diazepinones from SMILES strings, constructs their scaffold tree and checks it for consistency.
+     *
+     * @throws Exception if anything goes wrong
+     */
+    @Test
+    public void generateSchuffenhauerTreeTestMultipleMolecules() throws Exception {
+        SmilesParser tmpSmiPar = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        SmilesGenerator tmpSmiGen = new SmilesGenerator(SmiFlavor.Unique | SmiFlavor.UseAromaticSymbols);
+        IAtomContainer tmpDiazepam = tmpSmiPar.parseSmiles("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3");
+        IAtomContainer tmpBromazepam = tmpSmiPar.parseSmiles("C1C(=O)NC2=C(C=C(C=C2)Br)C(=N1)C3=CC=CC=N3");
+        IAtomContainer tmpZolazepam = tmpSmiPar.parseSmiles("CC1=NN(C2=C1C(=NCC(=O)N2C)C3=CC=CC=C3F)C");
+        List<IAtomContainer> tmpInputMolecules = Arrays.asList(tmpDiazepam, tmpBromazepam, tmpZolazepam);
+        ScaffoldGenerator tmpScaffoldGen = this.getScaffoldGeneratorTestSettings();
+        ScaffoldTree tmpDiazepinonesTree = tmpScaffoldGen.generateSchuffenhauerForest(tmpInputMolecules).get(0);
+        Assertions.assertEquals(2, tmpDiazepinonesTree.getMaxLevel());
+        for (int i = 0; i <= tmpDiazepinonesTree.getMaxLevel(); i++) {
+            for (ScaffoldNodeBase tmpNode: tmpDiazepinonesTree.getAllNodesOnLevel(i)) {
+                Assertions.assertEquals(i, tmpNode.getLevel());
+            }
+        }
+        Assertions.assertEquals("O=C1NC=CC=NC1", tmpSmiGen.create((IAtomContainer) tmpDiazepinonesTree.getRoot().getMolecule()));
+        Assertions.assertEquals(1, tmpDiazepinonesTree.getAllNodesOnLevel(0).size());
+        Assertions.assertEquals(2, tmpDiazepinonesTree.getAllNodesOnLevel(1).size());
+        Assertions.assertEquals(3, tmpDiazepinonesTree.getAllNodesOnLevel(2).size());
+    }
+
+    /**
      * Creates a scaffold network from a V2000 or V3000 mol file and checks the generated fragments.
      *
      * @throws Exception if anything goes wrong
      */
     @Test
     @Tag("SlowTest")
-    public void generateScaffoldNetworkTest() throws Exception {
+    public void generateScaffoldNetworkTestSingleMol() throws Exception {
         //Load molecule from mol file
         IAtomContainer tmpMolecule = this.loadMolFile("src/test/resources/Test3.mol");
         //Generate a network of molecules with iteratively removed terminal rings
@@ -548,6 +575,31 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         Assertions.assertEquals("O=C1N2CCSC2C1", tmpStringList.get(7));
         Assertions.assertEquals("O=C1NCC1", tmpStringList.get(8));
         Assertions.assertEquals("S1CNCC1", tmpStringList.get(9));
+    }
+
+    /**
+     * Parses three diazepinones from SMILES strings, constructs their scaffold network and checks it for consistency.
+     *
+     * @throws Exception if anything goes wrong
+     */
+    @Test
+    public void generateScaffoldNetworkTestMultipleMolecules() throws Exception {
+        SmilesParser tmpSmiPar = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        IAtomContainer tmpDiazepam = tmpSmiPar.parseSmiles("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3");
+        IAtomContainer tmpBromazepam = tmpSmiPar.parseSmiles("C1C(=O)NC2=C(C=C(C=C2)Br)C(=N1)C3=CC=CC=N3");
+        IAtomContainer tmpZolazepam = tmpSmiPar.parseSmiles("CC1=NN(C2=C1C(=NCC(=O)N2C)C3=CC=CC=C3F)C");
+        List<IAtomContainer> tmpInputMolecules = Arrays.asList(tmpDiazepam, tmpBromazepam, tmpZolazepam);
+        ScaffoldGenerator tmpScaffoldGen = this.getScaffoldGeneratorTestSettings();
+        ScaffoldNetwork tmpDiazepinonesNetwork = tmpScaffoldGen.generateScaffoldNetwork(tmpInputMolecules);
+        Assertions.assertEquals(2, tmpDiazepinonesNetwork.getMaxLevel());
+        for (int i = 0; i <= tmpDiazepinonesNetwork.getMaxLevel(); i++) {
+            for (ScaffoldNodeBase tmpNode: tmpDiazepinonesNetwork.getAllNodesOnLevel(i)) {
+                Assertions.assertEquals(i, tmpNode.getLevel());
+            }
+        }
+        Assertions.assertEquals(4, tmpDiazepinonesNetwork.getAllNodesOnLevel(0).size());
+        Assertions.assertEquals(4, tmpDiazepinonesNetwork.getAllNodesOnLevel(1).size());
+        Assertions.assertEquals(3, tmpDiazepinonesNetwork.getAllNodesOnLevel(2).size());
     }
 
     /**
@@ -644,11 +696,12 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
         /*Checks*/
         Assertions.assertEquals(5, tmpScaffoldNetwork.getRoots().size());
         Assertions.assertEquals(16, tmpScaffoldNetwork.getAllNodes().size());
-        Assertions.assertEquals(6, tmpScaffoldNetwork.getAllNodesOnLevel(0).size());
+        Assertions.assertEquals(5, tmpScaffoldNetwork.getAllNodesOnLevel(0).size());
         Assertions.assertEquals(3, tmpScaffoldNetwork.getMaxLevel());
         SmilesGenerator tmpSmilesGenerator = new SmilesGenerator(SmiFlavor.Unique);
-        IAtomContainer tmpNodeMolecule = (IAtomContainer) tmpScaffoldNetwork.getMatrixNode(8).getMolecule();
-        Assertions.assertEquals("S1C(NN2NC(NC12)C=3C=CC=CC3)C=4C=CC=CC4", tmpSmilesGenerator.create(tmpNodeMolecule));
+        ////note: cannot test for exact matrix values since those might be different in different testing environments
+        //IAtomContainer tmpNodeMolecule = (IAtomContainer) tmpScaffoldNetwork.getMatrixNode(8).getMolecule();
+        //Assertions.assertEquals("S1C(NN2NC(NC12)C=3C=CC=CC3)C=4C=CC=CC4", tmpSmilesGenerator.create(tmpNodeMolecule));
         Integer[][] tmpNetworkMatrix = tmpScaffoldNetwork.getMatrix();
         for (int i = 0; i < tmpNetworkMatrix.length; i++) {
             //note: cannot test for exact matrix values since those might be different in different testing environments

@@ -74,6 +74,16 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
             throw new IllegalArgumentException("Node can not be added to ScaffoldNetwork. Parameter must be a NetworkNode.");
         }
         this.addNodeToCollections(aNode);
+        this.updateLevelMap();
+        //Increase nodeCounter
+        this.nodeCounter++;
+    }
+
+    /**
+     * Updates the assignment of nodes to levels in the level map by iterating over all nodes and enquiring their levels.
+     * To be used after the merging of another network and internally after the addition of another node.
+     */
+    public void updateLevelMap() {
         HashMap<Integer, HashSet<ScaffoldNodeBase>> tmpLevelMap = new HashMap<>(ScaffoldNodeCollectionBase.NODE_MAPS_INIT_CAPACITY,
                 ScaffoldNodeCollectionBase.NODE_MAPS_LOAD_FACTOR);
         for(ScaffoldNodeBase tmpNodeBase : this.getAllNodes()) {
@@ -83,8 +93,6 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
             tmpLevelMap.get(tmpLevelInternal).add(tmpNetworkNode);
         }
         this.levelMap = tmpLevelMap;
-        //Increase nodeCounter
-        this.nodeCounter++;
     }
 
     /**
@@ -186,6 +194,7 @@ public class ScaffoldNetwork extends ScaffoldNodeCollectionBase {
                 }
             }
         }
+        this.updateLevelMap();
     }
 
     /**

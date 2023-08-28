@@ -71,12 +71,14 @@ public class ScaffoldTree extends ScaffoldNodeCollectionBase {
             throw new IllegalArgumentException("Node can not be added to ScaffoldTree. Parameter must be a TreeNode");
         }
         this.addNodeToCollections(aNode);
-        for(int tmpCount = 0; tmpCount < aNode.getLevel(); tmpCount++) {
-            TreeNode<?> tmpNextNode = ((TreeNode<?>) aNode).getParent();
-            for(Object tmpString : aNode.getOriginSmilesList()) {
+        int tmpNewNodeLevel = aNode.getLevel();
+        TreeNode<?> tmpIterNode = (TreeNode<?>) aNode;
+        for(int tmpCount = 0; tmpCount < tmpNewNodeLevel; tmpCount++) {
+            TreeNode<?> tmpNextNode = ((TreeNode<?>) tmpIterNode).getParent();
+            for(Object tmpString : tmpIterNode.getOriginSmilesList()) {
                 tmpNextNode.addOriginSmiles((String) tmpString);
             }
-            aNode = tmpNextNode;
+            tmpIterNode = tmpNextNode;
         }
         //Increase nodeCounter
         this.nodeCounter++;
