@@ -168,7 +168,7 @@ public class GitHubWikiCodeExamplesTest {
     }
     //
     /**
-     * Scaffold can be dissected into so-called parent scaffolds according to two methodologies (see article and below).
+     * Scaffolds can be dissected into so-called parent scaffolds according to two methodologies (see article and below).
      */
     @Test
     public void testParentScaffoldGeneration() throws Exception {
