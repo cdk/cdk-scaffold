@@ -1,4 +1,14 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold) [![build](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml/badge.svg)](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cdk_cdk-scaffold&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cdk_cdk-scaffold) [![DOI](https://zenodo.org/badge/638930745.svg)](https://zenodo.org/badge/latestdoi/638930745)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold) 
+[![build](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml/badge.svg)](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-blue.svg)](https://GitHub.com/cdk/cdk-scaffold/graphs/commit-activity)
+[![GitHub issues](https://img.shields.io/github/issues/cdk/cdk-scaffold.svg)](https://GitHub.com/cdk/cdk-scaffold/issues/)
+[![GitHub contributors](https://img.shields.io/github/contributors/cdk/cdk-scaffold.svg)](https://GitHub.com/cdk/cdk-scaffold/graphs/contributors/)
+[![GitHub release](https://img.shields.io/github/release/cdk/cdk-scaffold.svg)](https://github.com/cdk/cdk-scaffold/releases/)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cdk_cdk-scaffold&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cdk_cdk-scaffold)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cdk_cdk-scaffold&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cdk_cdk-scaffold) 
+[![DOI](https://zenodo.org/badge/638930745.svg)](https://zenodo.org/badge/latestdoi/638930745)
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html)
+[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
 # CDK-Scaffold Module
 ## Scaffold Functionalities for the Chemistry Development Kit (CDK)
@@ -9,7 +19,7 @@ Copyright &copy; 2023 The CDK Development Team, especially
 [Achim Zielesny](mailto:achim.zielesny@w-hs.de),
 [Christoph Steinbeck](mailto:christoph.steinbeck@uni-jena.de)
 
-License: LGPL v2, see LICENSE.txt
+License: LGPL v2.1, see LICENSE.txt
 
 [Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
 
