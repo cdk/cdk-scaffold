@@ -19,18 +19,23 @@ Copyright &copy; 2023 The CDK Development Team, especially
 [Achim Zielesny](mailto:achim.zielesny@w-hs.de),
 [Christoph Steinbeck](mailto:christoph.steinbeck@uni-jena.de)
 
-License: LGPL v2.1, see LICENSE.txt
+License: LGPL v2.1, see [LICENSE.txt](https://github.com/cdk/cdk-scaffold/blob/main/LICENSE.txt).
 
-[Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
+[CDK Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [CDK Users Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
 
 ## Introduction
 
-The CDK is an open-source Java library for cheminformatics and bioinformatics. For more details, visit the main CDK repository
+The Chemistry Development Kit (CDK) is an open-source Java library for cheminformatics and bioinformatics. For more details, visit the main CDK repository
 at [https://github.com/cdk/cdk](https://github.com/cdk/cdk).
 
-The cdk-scaffold module makes versatile molecular scaffold functionalities available for integration with CDK-based workflows 
-and software. All details of the functionality and implementation are described in <a href="https://doi.org/10.1186/s13321-022-00656-x"> 
-Schaub et al. "Scaffold Generator: a Java library implementing molecular scaffold functionalities in the Chemistry Development Kit (CDK)" (J Cheminform 14, 79, 2022)</a><p>
+The cdk-scaffold module makes versatile molecular scaffold functionalities available for integration with CDK-based workflows and software. 
+
+It was initially based on the "Scaffold Generator" project which is described in detail in [Schaub et al. "Scaffold Generator: a Java library implementing molecular scaffold functionalities in the Chemistry Development Kit (CDK)" (J Cheminform 14, 79, 2022)](https://doi.org/10.1186/s13321-022-00656-x).
+
+Detailed code examples can be found in the [repository wiki](https://github.com/cdk/cdk-scaffold/wiki).
+
+Some of the cdk-scaffold functionalities are also implemented in the MORTAR (MOlecule fRagmenTAtion fRamework) rich client Graphical User Interface (GUI) application ([GitHub repository](https://github.com/FelixBaensch/MORTAR) | [article](https://doi.org/10.1186/s13321-022-00674-9))
+<p>
 
 ## Install
 
