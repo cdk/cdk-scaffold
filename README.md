@@ -49,13 +49,13 @@ If you are using Maven, you can install the cdk-scaffold package using:
 <dependency>
   <artifactId>cdk-scaffold</artifactId>
   <groupId>org.openscience.cdk</groupId>
-  <version>2.8</version>
+  <version>2.9</version>
 </dependency>
 ```
 
 ### Snapshot releases
 
-For snapshot releases (currently `2.8-SNAPSHOT`) include the following fragment to define the
+For snapshot releases (currently `2.9-SNAPSHOT`) include the following fragment to define the
 snapshot repository:
  
 ```xml
