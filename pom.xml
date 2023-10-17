@@ -48,7 +48,9 @@
     <developers>
       <developer>
         <name>Jonas Schaub</name>
+        <email>jonas.schaub@uni-jena.de</email>
         <organization>Friedrich Schiller University Jena</organization>
+        <organizationUrl>https://cheminf.uni-jena.de</organizationUrl>
       </developer>
       <developer>
         <name>Egon Willighagen</name>
