@@ -21,7 +21,7 @@ Copyright &copy; 2023 The CDK Development Team, especially
 
 License: LGPL v2.1, see [LICENSE.txt](https://github.com/cdk/cdk-scaffold/blob/main/LICENSE.txt).
 
-[CDK Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [CDK Users Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
+[GitHub repository](https://github.com/cdk/cdk-scaffold/) | [CDK Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [CDK Users Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
 
 ## Introduction
 
@@ -34,10 +34,10 @@ It was initially based on the "Scaffold Generator" project which is described in
 
 Detailed code examples can be found in the [repository wiki](https://github.com/cdk/cdk-scaffold/wiki).
 
-Some of the cdk-scaffold functionalities are also implemented in the MORTAR (MOlecule fRagmenTAtion fRamework) rich client Graphical User Interface (GUI) application ([GitHub repository](https://github.com/FelixBaensch/MORTAR) | [article](https://doi.org/10.1186/s13321-022-00674-9)).
+Some of the cdk-scaffold functionalities are also implemented in the MORTAR (MOlecule fRagmenTAtion fRamework) rich client Graphical User Interface (GUI) application ([GitHub repository](https://github.com/FelixBaensch/MORTAR), [article](https://doi.org/10.1186/s13321-022-00674-9)).
 
 The (very basic) visualisation functionalities for scaffold trees and networks described in the Scaffold Generator article linked above can be found in [this repository](https://github.com/JonasSchaub/scaffold-graph-vis).
-<p>
+<p></p>
 
 ## Install
 
