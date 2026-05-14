@@ -6,7 +6,7 @@
     <groupId>org.openscience.cdk</groupId>
     <artifactId>cdk-scaffold</artifactId>
     <name>cdk-scaffold</name>
-    <version>2.9-SNAPSHOT</version>
+    <version>2.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/cdk/cdk-scaffold</url>
@@ -26,7 +26,7 @@
         <!--suppress UnresolvedMavenProperty -->
         <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/bundle/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <cdk.version>2.9</cdk.version>
+        <cdk.version>2.12</cdk.version>
         <junit.version>5.9.3</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jacoco.version>0.8.15</jacoco.version>
