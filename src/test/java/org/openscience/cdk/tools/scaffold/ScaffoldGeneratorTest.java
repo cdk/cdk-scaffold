@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Julian Zander <zanderjulian@gmx.de>
+ * Copyright (c) 2026 Julian Zander <zanderjulian@gmx.de>
  *                    Jonas Schaub <jonas.schaub@uni-jena.de>
  *                    Achim Zielesny <achim.zielesny@w-hs.de>
  *                    Christoph Steinbeck <christoph.steinbeck@uni-jena.de>
@@ -57,7 +57,8 @@ import java.util.Map;
 /**
  * JUnit test class for the Scaffold Generator.
  *
- * @author Julian Zander, Jonas Schaub (zanderjulian@gmx.de, jonas.schaub@uni-jena.de)
+ * @author Julian Zander (zanderjulian@gmx.de)
+ * @author Jonas Schaub (jonas.schaub@uni-jena.de)
  * @version 1.0.7.0
  */
 public class ScaffoldGeneratorTest extends ScaffoldGenerator {
@@ -944,7 +945,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
                 "C1CCCC(/C(=C(/C2CCCNCCC2)\\C3CCCCC(C4CCCC(CC(CC5CCNCC5)=C)C4)CC3)/C6CCCCCNC6)CCC1",
                 "C1CCCC(/C(=C(/C2CCCNCCC2)\\C3CCCCC(C4CCCCC4)CC3)/C5CCCCCNC5)CCC1",
                 "C1CCCC(/C(=C(/C2CCCNCCC2)\\C3CCCCCCC3)/C4CCCCCNC4)CCC1",
-                "C(=C(C1CCCNCCC1)C2CCCCCCC2)C3CCCCCNC3",
+                "C(=C(/C1CCCNCCC1)\\C2CCCCCCC2)/C3CCCCCNC3",
                 "C(C1CCCNCCC1)(C2CCCCCCC2)=C",
                 "C1CCCNCCC1"
         };
