@@ -13,9 +13,10 @@
 # CDK-Scaffold Module
 ## Scaffold Functionalities for the Chemistry Development Kit (CDK)
  
-Copyright &copy; 2023 The CDK Development Team, especially
+Copyright &copy; 2023-2026 The CDK Development Team, especially
 [Julian Zander](mailto:zanderjulian@gmx.de),
 [Jonas Schaub](mailto:jonas.schaub@uni-jena.de),
+[Egon Willighagen](https://github.com/egonw),
 [Achim Zielesny](mailto:achim.zielesny@w-hs.de),
 [Christoph Steinbeck](mailto:christoph.steinbeck@uni-jena.de)
 
@@ -51,13 +52,13 @@ If you are using Maven, you can install the cdk-scaffold package using:
 <dependency>
   <artifactId>cdk-scaffold</artifactId>
   <groupId>org.openscience.cdk</groupId>
-  <version>2.8</version>
+  <version>2.12</version>
 </dependency>
 ```
 
 ### Snapshot releases
 
-For snapshot releases (currently `2.9-SNAPSHOT`) include the following fragment to define the
+For snapshot releases (currently `2.13-SNAPSHOT`) include the following fragment to define the
 snapshot repository:
  
 ```xml
