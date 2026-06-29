@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Julian Zander <zanderjulian@gmx.de>
+ * Copyright (c) 2026 Julian Zander <zanderjulian@gmx.de>
  *                    Jonas Schaub <jonas.schaub@uni-jena.de>
  *                    Achim Zielesny <achim.zielesny@w-hs.de>
  *                    Christoph Steinbeck <christoph.steinbeck@uni-jena.de>

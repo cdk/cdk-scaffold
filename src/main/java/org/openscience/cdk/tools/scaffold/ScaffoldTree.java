@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Julian Zander <zanderjulian@gmx.de>
+ * Copyright (c) 2026 Julian Zander <zanderjulian@gmx.de>
  *                    Jonas Schaub <jonas.schaub@uni-jena.de>
  *                    Achim Zielesny <achim.zielesny@w-hs.de>
  *                    Christoph Steinbeck <christoph.steinbeck@uni-jena.de>
@@ -35,7 +35,8 @@ import java.util.Objects;
  * Top-level class to organise the TreeNodes as a tree.
  * A tree can have one root and several leaves.
  *
- * @author Julian Zander, Jonas Schaub (zanderjulian@gmx.de, jonas.schaub@uni-jena.de)
+ * @author Julian Zander (zanderjulian@gmx.de)
+ * @author Jonas Schaub (jonas.schaub@uni-jena.de)
  * @version 1.0.2.0
  */
 public class ScaffoldTree extends ScaffoldNodeCollectionBase {

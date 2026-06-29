@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Julian Zander <zanderjulian@gmx.de>
+ * Copyright (c) 2026 Julian Zander <zanderjulian@gmx.de>
  *                    Jonas Schaub <jonas.schaub@uni-jena.de>
  *                    Achim Zielesny <achim.zielesny@w-hs.de>
  *                    Christoph Steinbeck <christoph.steinbeck@uni-jena.de>
@@ -69,7 +69,8 @@ import java.util.TreeMap;
  * Mining for Bioactive Scaffolds with Scaffold Networks</a> paper.
  * Different trees or networks can also be merged together.
  *
- * @author Julian Zander, Jonas Schaub (zanderjulian@gmx.de, jonas.schaub@uni-jena.de)
+ * @author Julian Zander (zanderjulian@gmx.de)
+ * @author Jonas Schaub (jonas.schaub@uni-jena.de)
  * @version 1.0.4.0
  */
 public class ScaffoldGenerator {

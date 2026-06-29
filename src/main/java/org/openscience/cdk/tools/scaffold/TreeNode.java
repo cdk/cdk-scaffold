@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Julian Zander <zanderjulian@gmx.de>
+ * Copyright (c) 2026 Julian Zander <zanderjulian@gmx.de>
  *                    Jonas Schaub <jonas.schaub@uni-jena.de>
  *                    Achim Zielesny <achim.zielesny@w-hs.de>
  *                    Christoph Steinbeck <christoph.steinbeck@uni-jena.de>
@@ -34,7 +34,8 @@ import java.util.Objects;
  * @param <MoleculeType> As MoleculeType, any data type can be defined.
  *                      In our scenario, the node contains a CDK IAtomContainer.
  *
- * @author Julian Zander, Jonas Schaub (zanderjulian@gmx.de, jonas.schaub@uni-jena.de)
+ * @author Julian Zander (zanderjulian@gmx.de)
+ * @author Jonas Schaub (jonas.schaub@uni-jena.de)
  * @version 1.0.0.0
  */
 public class TreeNode<MoleculeType> extends ScaffoldNodeBase<MoleculeType> {
