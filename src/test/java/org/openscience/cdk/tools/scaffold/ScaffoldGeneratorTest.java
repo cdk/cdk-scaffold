@@ -945,7 +945,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
                 "C1CCCC(/C(=C(/C2CCCNCCC2)\\C3CCCCC(C4CCCC(CC(CC5CCNCC5)=C)C4)CC3)/C6CCCCCNC6)CCC1",
                 "C1CCCC(/C(=C(/C2CCCNCCC2)\\C3CCCCC(C4CCCCC4)CC3)/C5CCCCCNC5)CCC1",
                 "C1CCCC(/C(=C(/C2CCCNCCC2)\\C3CCCCCCC3)/C4CCCCCNC4)CCC1",
-                "C(=C(/C1CCCNCCC1)\\C2CCCCCCC2)/C3CCCCCNC3",
+                "C(=C(\\C1CCCNCCC1)/C2CCCCCCC2)\\C3CCCCCNC3",
                 "C(C1CCCNCCC1)(C2CCCCCCC2)=C",
                 "C1CCCNCCC1"
         };
