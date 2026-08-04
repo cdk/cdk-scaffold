@@ -52,18 +52,39 @@
     </issueManagement>
 
     <developers>
-      <developer>
-        <name>Jonas Schaub</name>
-        <email>jonas.schaub@uni-jena.de</email>
-        <organization>Friedrich Schiller University Jena</organization>
-        <organizationUrl>https://cheminf.uni-jena.de</organizationUrl>
-      </developer>
-      <developer>
-        <name>Egon Willighagen</name>
-        <email>egon.willighagen@maastrichtuniversity.nl</email>
-        <organization>Maastricht University</organization>
-        <organizationUrl>http://www.bigcat.unimaas.nl/</organizationUrl>
-      </developer>
+        <developer>
+            <name>Jonas Schaub</name>
+            <email>jonas.schaub@uni-jena.de</email>
+            <organization>Friedrich Schiller University Jena</organization>
+            <organizationUrl>https://cheminf.uni-jena.de</organizationUrl>
+        </developer>
+        <developer>
+            <name>Egon Willighagen</name>
+            <email>egon.willighagen@maastrichtuniversity.nl</email>
+            <organization>Maastricht University</organization>
+            <organizationUrl>http://www.bigcat.unimaas.nl/</organizationUrl>
+        </developer>
+        <developer>
+            <name>John Mayfield</name>
+            <email>john@nextmovesoftware.com</email>
+            <url>http://www.github.com/johnmay/</url>
+        </developer>
+        <developer>
+            <name>Julian Zander</name>
+            <url>https://github.com/Julian-W98</url>
+        </developer>
+        <developer>
+            <name>Christoph Steinbeck</name>
+            <email>christoph.steinbeck@uni-jena.de</email>
+            <organization>Friedrich Schiller University Jena</organization>
+            <organizationUrl>https://cheminf.uni-jena.de</organizationUrl>
+        </developer>
+        <developer>
+            <name>Achim Zielesny</name>
+            <email>achim.zielesny@w-hs.de</email>
+            <organization>Westphalian University of Applied Sciences</organization>
+            <organizationUrl>https://www.en.w-hs.de</organizationUrl>
+        </developer>
     </developers>
 
     <!-- define the cdk.repo.url and cdk.repo.snapshots.url properties in 
