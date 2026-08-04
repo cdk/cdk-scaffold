@@ -16,8 +16,14 @@ authors:
   - family-names: "Steinbeck"
     given-names: "Christoph"
     orcid: "https://orcid.org/0000-0001-6966-0814"
+  - family-names: "Willighagen"
+    given-names: "Egon"
+    orcid: "https://orcid.org/0000-0001-7542-0286"
+  - family-names: "Mayfield"
+    given-names: "John"
+    orcid: "https://orcid.org/0000-0001-7730-2646"
 doi: "10.5281/zenodo.7940339"
-date-released: 2026-07-26
+date-released: 2026-08-04
 url: "https://github.com/cdk/cdk-scaffold"
 license: LGPL-2.1
 references:
