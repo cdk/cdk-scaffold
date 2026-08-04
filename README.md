@@ -16,10 +16,12 @@
 ## Scaffold Functionalities for the Chemistry Development Kit (CDK)
  
 Copyright &copy; 2023-2026 The CDK Development Team, especially
-[Julian Zander](mailto:zanderjulian@gmx.de),
-[Jonas Schaub](mailto:jonas.schaub@uni-jena.de),
-[Achim Zielesny](mailto:achim.zielesny@w-hs.de),
-[Christoph Steinbeck](mailto:christoph.steinbeck@uni-jena.de)
+[Julian Zander](https://github.com/Julian-W98),
+[Jonas Schaub](https://github.com/JonasSchaub),
+[Achim Zielesny](https://github.com/zielesny),
+[Christoph Steinbeck](https://github.com/steinbeck)
+[Egon Willighagen](https://github.com/egonw)
+[John Mayfield](https://github.com/johnmay)
 
 License: LGPL v2.1, see [LICENSE.txt](https://github.com/cdk/cdk-scaffold/blob/main/LICENSE.txt).
 
@@ -59,7 +61,7 @@ If you are using Maven, you can install the cdk-scaffold package using:
 
 ### Snapshot releases
 
-For snapshot releases (currently `2.9-SNAPSHOT`) include the following fragment to define the
+For snapshot releases (currently `2.10-SNAPSHOT`) include the following fragment to define the
 snapshot repository:
  
 ```xml
