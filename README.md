@@ -67,8 +67,8 @@ snapshot repository:
 ```xml
 <repositories>
   <repository>
-    <id>ossrh</id>
-    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    <id>central-snapshots</id>
+    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
   </repository>
 </repositories>
 ```
