@@ -19,8 +19,8 @@ Copyright &copy; 2023-2026 The CDK Development Team, especially
 [Julian Zander](https://github.com/Julian-W98),
 [Jonas Schaub](https://github.com/JonasSchaub),
 [Achim Zielesny](https://github.com/zielesny),
-[Christoph Steinbeck](https://github.com/steinbeck)
-[Egon Willighagen](https://github.com/egonw)
+[Christoph Steinbeck](https://github.com/steinbeck),
+[Egon Willighagen](https://github.com/egonw),
 [John Mayfield](https://github.com/johnmay)
 
 License: LGPL v2.1, see [LICENSE.txt](https://github.com/cdk/cdk-scaffold/blob/main/LICENSE.txt).
