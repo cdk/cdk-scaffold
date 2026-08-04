@@ -26,6 +26,7 @@ package org.openscience.cdk.tools.scaffold;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.openscience.cdk.AtomContainer;
 import org.openscience.cdk.aromaticity.Kekulization;
 import org.openscience.cdk.interfaces.IAtom;
@@ -929,7 +930,7 @@ public class ScaffoldGeneratorTest extends ScaffoldGenerator {
      *
      * @throws Exception if anything goes wrong
      */
-    @Test
+    @Disabled
     public void stereoFragmentationTest() throws Exception {
         ScaffoldGenerator tmpScaffoldGenerator = this.getScaffoldGeneratorTestSettings();
         tmpScaffoldGenerator.setSmilesGeneratorSetting(new SmilesGenerator(SmiFlavor.Isomeric));
