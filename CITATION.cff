@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: cdk-scaffold
-version: 2.10
+version: 2.11
 date-released: 2026-08-07
 message: "If you use this software, please cite it as below and also cite the accompanying scientific publication referenced below."
 type: software
