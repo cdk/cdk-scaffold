@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 title: cdk-scaffold
-version: 2.9
+version: 2.10
+date-released: 2026-08-07
 message: "If you use this software, please cite it as below and also cite the accompanying scientific publication referenced below."
 type: software
 authors:
@@ -23,7 +24,6 @@ authors:
     given-names: "John"
     orcid: "https://orcid.org/0000-0001-7730-2646"
 doi: "10.5281/zenodo.7940339"
-date-released: 2026-08-04
 url: "https://github.com/cdk/cdk-scaffold"
 license: LGPL-2.1
 references:
