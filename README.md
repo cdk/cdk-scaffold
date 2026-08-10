@@ -61,7 +61,7 @@ If you are using Maven, you can install the cdk-scaffold package using:
 
 ### Snapshot releases
 
-For snapshot releases (currently `2.12-SNAPSHOT`) include the following fragment to define the
+For snapshot releases (currently `2.13-SNAPSHOT`) include the following fragment to define the
 snapshot repository:
  
 ```xml
