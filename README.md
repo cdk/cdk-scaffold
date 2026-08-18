@@ -55,7 +55,7 @@ If you are using Maven, you can install the cdk-scaffold package using:
 <dependency>
   <artifactId>cdk-scaffold</artifactId>
   <groupId>org.openscience.cdk</groupId>
-  <version>2.12</version>
+  <version>2.13</version>
 </dependency>
 ```
 
