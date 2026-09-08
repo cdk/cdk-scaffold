@@ -1,12 +1,14 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.openscience.cdk/cdk-scaffold) 
+[![Maven Central Version](https://img.shields.io/maven-central/v/org.openscience.cdk/cdk-scaffold)](https://central.sonatype.com/artifact/org.openscience.cdk/cdk-scaffold)
 [![build](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml/badge.svg)](https://github.com/cdk/cdk-scaffold/actions/workflows/maven.yml) 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-blue.svg)](https://GitHub.com/cdk/cdk-scaffold/graphs/commit-activity)
 [![GitHub issues](https://img.shields.io/github/issues/cdk/cdk-scaffold.svg)](https://GitHub.com/cdk/cdk-scaffold/issues/)
 [![GitHub contributors](https://img.shields.io/github/contributors/cdk/cdk-scaffold.svg)](https://GitHub.com/cdk/cdk-scaffold/graphs/contributors/)
 [![GitHub release](https://img.shields.io/github/release/cdk/cdk-scaffold.svg)](https://github.com/cdk/cdk-scaffold/releases/)
+<!---
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cdk_cdk-scaffold&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cdk_cdk-scaffold)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cdk_cdk-scaffold&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cdk_cdk-scaffold) 
-[![DOI](https://zenodo.org/badge/638930745.svg)](https://zenodo.org/badge/latestdoi/638930745)
+--->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21788196.svg)](https://doi.org/10.5281/zenodo.21788196)
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html)
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
@@ -14,14 +16,16 @@
 ## Scaffold Functionalities for the Chemistry Development Kit (CDK)
  
 Copyright &copy; 2023-2026 The CDK Development Team, especially
-[Julian Zander](mailto:zanderjulian@gmx.de),
-[Jonas Schaub](mailto:jonas.schaub@uni-jena.de),
-[Achim Zielesny](mailto:achim.zielesny@w-hs.de),
-[Christoph Steinbeck](mailto:christoph.steinbeck@uni-jena.de)
+[Julian Zander](https://github.com/Julian-W98),
+[Jonas Schaub](https://github.com/JonasSchaub),
+[Achim Zielesny](https://github.com/zielesny),
+[Christoph Steinbeck](https://github.com/steinbeck),
+[Egon Willighagen](https://github.com/egonw),
+[John Mayfield](https://github.com/johnmay)
 
 License: LGPL v2.1, see [LICENSE.txt](https://github.com/cdk/cdk-scaffold/blob/main/LICENSE.txt).
 
-[GitHub repository](https://github.com/cdk/cdk-scaffold/) | [CDK Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [CDK Users Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
+[CDK Home Page](https://cdk.github.io/) | [JavaDoc](http://cdk.github.io/cdk-scaffold/latest/docs/api/index.html?overview-summary.html) | [Wiki](https://github.com/cdk/cdk-scaffold/wiki) | [Issues](https://github.com/cdk/cdk-scaffold/issues) | [CDK Users Mailing List](https://sourceforge.net/projects/cdk/lists/cdk-user)
 
 ## Introduction
 
@@ -51,21 +55,21 @@ If you are using Maven, you can install the cdk-scaffold package using:
 <dependency>
   <artifactId>cdk-scaffold</artifactId>
   <groupId>org.openscience.cdk</groupId>
-  <version>2.9</version>
+  <version>2.13</version>
 </dependency>
 ```
 
 ### Snapshot releases
 
-For snapshot releases (currently `2.9-SNAPSHOT`) include the following fragment to define the
+For snapshot releases (currently `2.13-SNAPSHOT`) include the following fragment to define the
 snapshot repository:
  
 ```xml
 <repositories>
-  <repository>
-    <id>ossrh</id>
-    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-  </repository>
+    <repository>
+        <id>central-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+    </repository>
 </repositories>
 ```
 
